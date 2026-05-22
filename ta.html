@@ -89,7 +89,7 @@ body{background:#f5f0e8;font-family:system-ui,-apple-system,sans-serif;margin:0;
       <span class="brand-name">Activated Insights</span>
       <div class="brand-divider"></div>
       <span class="sales-label">Sales Floor · MTD</span>
-      <span class="updated">Updated May 21, 2026</span>
+      <span class="updated">Updated May 22, 2026</span>
     </div>
     <div style="display:flex;align-items:center;gap:12px">
       <span class="slide-counter" id="counter">1 / 11</span>
@@ -115,39 +115,44 @@ const MGRS={
 const TL={'sl':'Senior Living','hbc':'Home-Based Care','ent':'Enterprise','bdr-sl':'BDR · SL','bdr-hbc':'BDR · HBC','bdr-ent':'BDR · Enterprise'};
 
 const AE=[
+  // Caleb — subtotal 20,068.64
   {name:'Bennet Bleil',team:'hbc',calls:323,msched:4,acv:31716.16,units:8},
-  {name:'Caden Noble',team:'hbc',calls:433,msched:35,acv:6897.88,units:3},
-  {name:'Chris Pacis',team:'hbc',calls:291,msched:12,acv:10152.00,units:4},
+  {name:'Caden Noble',team:'hbc',calls:471,msched:39,acv:8337.88,units:4},
+  {name:'Chris Pacis',team:'hbc',calls:324,msched:13,acv:9424.08,units:5},
   {name:'Dan Arzhanov',team:'hbc',calls:22,msched:0,acv:2160.00,units:1},
-  {name:'Ethan Hatch',team:'hbc',calls:606,msched:17,acv:6900.72,units:4},
-  {name:'Kyler Coles',team:'hbc',calls:167,msched:1,acv:7978.80,units:4},
-  {name:'Nicholas Reis',team:'hbc',calls:601,msched:24,acv:28506.00,units:11},
-  {name:'Tony Humphreys',team:'hbc',calls:431,msched:24,acv:19726.00,units:6},
-  {name:'Travis Barton',team:'hbc',calls:578,msched:38,acv:2916.00,units:2},
-  {name:'Brett Keys',team:'hbc',calls:425,msched:14,acv:12209.88,units:4},
+  {name:'Ethan Hatch',team:'hbc',calls:646,msched:18,acv:6900.72,units:4},
+  {name:'Kyler Coles',team:'hbc',calls:181,msched:1,acv:7978.80,units:4},
+  {name:'Nicholas Reis',team:'hbc',calls:652,msched:27,acv:28506.00,units:11},
+  {name:'Tony Humphreys',team:'hbc',calls:433,msched:24,acv:22129.00,units:7},
+  {name:'Travis Barton',team:'hbc',calls:620,msched:44,acv:2916.00,units:2},
+  // Darin — subtotal 6,044.84
+  {name:'Brett Keys',team:'hbc',calls:458,msched:15,acv:13217.88,units:5},
   {name:'Connor Hollman',team:'hbc',calls:150,msched:5,acv:6955.20,units:5},
-  {name:'Daniel Bonilla',team:'hbc',calls:395,msched:15,acv:8815.56,units:4},
-  {name:'Jaxson Hellbusch',team:'hbc',calls:567,msched:33,acv:12422.16,units:8},
-  {name:'Jordan Bailey',team:'hbc',calls:518,msched:27,acv:3577.08,units:3},
-  {name:'Kaleb Polk',team:'hbc',calls:295,msched:6,acv:4587.00,units:2},
-  {name:'Riley Pettegrew',team:'hbc',calls:558,msched:27,acv:6535.48,units:4},
-  {name:'Tanner Schill',team:'hbc',calls:339,msched:9,acv:33900.40,units:8},
-  {name:'Clayton Jensen',team:'hbc',calls:0,msched:0,acv:11443.24,units:16},
+  {name:'Daniel Bonilla',team:'hbc',calls:407,msched:15,acv:11203.56,units:5},
+  {name:'Jaxson Hellbusch',team:'hbc',calls:611,msched:34,acv:15204.24,units:9},
+  {name:'Jordan Bailey',team:'hbc',calls:546,msched:29,acv:3577.08,units:3},
+  {name:'Kaleb Polk',team:'hbc',calls:338,msched:6,acv:5451.00,units:3},
+  {name:'Riley Pettegrew',team:'hbc',calls:605,msched:29,acv:6535.48,units:4},
+  {name:'Tanner Schill',team:'hbc',calls:351,msched:10,acv:33900.40,units:8},
+  // Deana — subtotal 0,378.84
+  {name:'Clayton Jensen',team:'hbc',calls:0,msched:0,acv:12336.04,units:18},
   {name:'Del Jenkins',team:'hbc',calls:0,msched:0,acv:18288.48,units:16},
-  {name:'Jessica Downing',team:'hbc',calls:0,msched:0,acv:8177.16,units:7},
-  {name:'Luke DeMarcus',team:'hbc',calls:0,msched:0,acv:4067.76,units:3},
+  {name:'Jessica Downing',team:'hbc',calls:0,msched:0,acv:11385.96,units:9},
+  {name:'Luke DeMarcus',team:'hbc',calls:0,msched:0,acv:6335.76,units:4},
   {name:'Mechell Howard',team:'hbc',calls:0,msched:0,acv:41672.40,units:14},
-  {name:'Trevon Hymer',team:'hbc',calls:0,msched:0,acv:360.00,units:1},
+  {name:'Trevon Hymer',team:'hbc',calls:0,msched:0,acv:380.00,units:1},
+  // Walpole — subtotal 7,081.29
   {name:'Caden Lowrance',team:'sl',calls:175,msched:11,acv:864.00,units:1},
   {name:'Cait Lee',team:'sl',calls:263,msched:7,acv:15429.96,units:2},
-  {name:'Colby Williams',team:'sl',calls:127,msched:1,acv:4752.00,units:1},
-  {name:'Drew Garside',team:'sl',calls:258,msched:14,acv:27303.00,units:1},
-  {name:'Gannon Sedlak',team:'sl',calls:219,msched:8,acv:3686.40,units:1},
-  {name:'Grace Grady',team:'sl',calls:381,msched:15,acv:2814.00,units:1},
-  {name:'Julia Blackwell',team:'sl',calls:328,msched:10,acv:3110.89,units:4},
-  {name:'Shelley Daenzer',team:'sl',calls:109,msched:3,acv:6101.04,units:2},
-  {name:'Jasmine Wieliczko',team:'sl',calls:332,msched:9,acv:0,units:0},
-  {name:'Logan Hurd',team:'sl',calls:448,msched:10,acv:0,units:0},
+  {name:'Colby Williams',team:'sl',calls:131,msched:1,acv:4752.00,units:1},
+  {name:'Drew Garside',team:'sl',calls:278,msched:16,acv:27303.00,units:1},
+  {name:'Gannon Sedlak',team:'sl',calls:237,msched:8,acv:3686.40,units:1},
+  {name:'Grace Grady',team:'sl',calls:404,msched:18,acv:2814.00,units:1},
+  {name:'Julia Blackwell',team:'sl',calls:363,msched:10,acv:3110.89,units:4},
+  {name:'Shelley Daenzer',team:'sl',calls:112,msched:3,acv:6101.04,units:2},
+  {name:'Jasmine Wieliczko',team:'sl',calls:350,msched:11,acv:3000.00,units:1},
+  {name:'Logan Hurd',team:'sl',calls:479,msched:10,acv:0,units:0},
+  // Alex
   {name:'Laurie Kaiser',team:'ent',calls:0,msched:0,acv:3012.00,units:1},
   {name:'Shawn Zbranek',team:'ent',calls:0,msched:0,acv:11299.92,units:1},
   {name:'Lucas Brandt',team:'ent',calls:0,msched:0,acv:259484.04,units:3},
@@ -159,7 +164,7 @@ const BDR=[
   {name:'Ty Konold',team:'bdr-hbc',calls:816,msched:30,qsos:12,sourced:3600},
   {name:'Ben Durgin',team:'bdr-hbc',calls:735,msched:17,qsos:13,sourced:20000},
   {name:'Jack Satterthwaite',team:'bdr-ent',calls:703,msched:6,qsos:0,sourced:0},
-  {name:'Elliot Bryant',team:'bdr-sl',calls:532,msched:3,qsos:3,sourced:0},
+  {name:'Elliot Bryant',team:'bdr-sl',calls:532,msched:4,qsos:3,sourced:0},
   {name:'Robin Call',team:'bdr-sl',calls:133,msched:2,qsos:0,sourced:0},
 ];
 
