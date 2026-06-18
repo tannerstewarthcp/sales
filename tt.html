@@ -6,10 +6,11 @@
 <meta http-equiv="refresh" content="3600">
 <title>Activated Insights · Sales Floor</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#f5f0e8;font-family:system-ui,-apple-system,sans-serif;margin:0;overflow:hidden}
-#wrap{background:#f5f0e8;color:#291e3b;height:100vh;display:flex;flex-direction:column}
-.topbar{background:#291e3b;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #f0b429;flex-shrink:0}
+body{background:#F8F4ED;font-family:'Archivo',Arial,Helvetica,sans-serif;margin:0;overflow:hidden}
+#wrap{background:#F8F4ED;color:#291E3B;height:100vh;display:flex;flex-direction:column}
+.topbar{background:#291E3B;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #E5B237;flex-shrink:0}
 .brand{display:flex;align-items:center;gap:12px}
 .brand-logo{height:36px;width:auto;display:block}
 .brand-name{font-size:15px;font-weight:700;color:#fff;letter-spacing:0.01em}
@@ -19,54 +20,54 @@ body{background:#f5f0e8;font-family:system-ui,-apple-system,sans-serif;margin:0;
 .updated{font-size:10px;color:#4a3a5c;margin-left:4px}
 .ndots{display:flex;gap:5px;align-items:center;flex-wrap:wrap;max-width:400px;justify-content:flex-end}
 .ndot{width:7px;height:7px;border-radius:50%;background:#4a3a5c;cursor:pointer;transition:background 0.2s}
-.ndot.on{background:#f0b429}
+.ndot.on{background:#E5B237}
 .progress-bar{height:3px;background:#e8e0d4;flex-shrink:0}
-.progress-fill{height:3px;background:#f0b429;transition:width 0.1s linear}
+.progress-fill{height:3px;background:#E5B237;transition:width 0.1s linear}
 .content{flex:1;overflow:hidden;position:relative}
 .slide{display:none;padding:22px 28px;flex-direction:column;gap:14px;height:100%;position:absolute;top:0;left:0;right:0;bottom:0}
 .slide.on{display:flex}
 .tags{display:flex;gap:8px;margin-bottom:2px}
 .tag{font-size:13px;font-weight:700;padding:5px 15px;border-radius:20px;text-transform:uppercase;letter-spacing:0.07em}
-.tag-ae{background:#291e3b;color:#fff}
-.tag-bdr{background:#e8e0d4;color:#291e3b}
-.tag-mtd{background:#f0b429;color:#291e3b}
-.tag-sl{background:#6b3fa0;color:#fff}
-.tag-hbc{background:#291e3b;color:#f0b429}
-.tag-team{background:#f0b429;color:#291e3b}
-.headline{font-size:28px;font-weight:700;color:#291e3b;line-height:1.2}
-.subline{font-size:12px;color:#9a8fa8;margin-top:3px}
+.tag-ae{background:#291E3B;color:#fff}
+.tag-bdr{background:#e8e0d4;color:#291E3B}
+.tag-mtd{background:#E5B237;color:#291E3B}
+.tag-sl{background:#78429A;color:#fff}
+.tag-hbc{background:#291E3B;color:#E5B237}
+.tag-team{background:#E5B237;color:#291E3B}
+.headline{font-family:Arial,Helvetica,sans-serif;font-size:28px;font-weight:700;color:#291E3B;line-height:1.2}
+.subline{font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#9a8fa8;margin-top:3px}
 .podium{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:4px}
 .pcard{background:#fff;border-radius:12px;border:1.5px solid #e8e0d4;padding:20px 16px;text-align:center;box-shadow:0 1px 4px rgba(41,30,59,0.07);display:flex;flex-direction:column;align-items:center}
-.pcard.p1{border-color:#f0b429;background:#fffbf0;box-shadow:0 3px 12px rgba(240,180,41,0.18)}
+.pcard.p1{border-color:#E5B237;background:#fffbf0;box-shadow:0 3px 12px rgba(229,178,55,0.18)}
 .medal{font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;display:inline-block;margin-bottom:12px}
-.m1{background:#f0b429;color:#291e3b}.m2{background:#e8e0d4;color:#291e3b}.m3{background:#ede8f5;color:#6b3fa0}
+.m1{background:#E5B237;color:#291E3B}.m2{background:#e8e0d4;color:#291E3B}.m3{background:#E8DBF5;color:#78429A}
 .av{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;margin:0 auto 10px;border:2px solid #e8e0d4}
-.av-sl{background:#ede8f5;color:#6b3fa0}.av-hbc{background:#291e3b;color:#f0b429}.av-ent{background:#f0ebe0;color:#291e3b}
-.av-bdr-sl{background:#ede8f5;color:#6b3fa0}.av-bdr-hbc{background:#291e3b;color:#f0b429}.av-bdr-ent{background:#f0ebe0;color:#291e3b}
+.av-sl{background:#E8DBF5;color:#78429A}.av-hbc{background:#291E3B;color:#E5B237}.av-ent{background:#f0ebe0;color:#291E3B}
+.av-bdr-sl{background:#E8DBF5;color:#78429A}.av-bdr-hbc{background:#291E3B;color:#E5B237}.av-bdr-ent{background:#f0ebe0;color:#291E3B}
 .av-photo{width:54px;height:54px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 10px;border:2.5px solid #e8e0d4}
-.pname{font-size:16px;font-weight:600;color:#291e3b;margin-bottom:2px}
+.pname{font-size:16px;font-weight:600;color:#291E3B;margin-bottom:2px}
 .pteam{font-size:10px;color:#9a8fa8;margin-bottom:12px}
-.pval{font-size:30px;font-weight:700;color:#291e3b;line-height:1}
+.pval{font-size:30px;font-weight:700;color:#291E3B;line-height:1}
 .punit{font-size:11px;color:#9a8fa8;margin-top:4px}
 .team-deals-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px}
 .team-deals-card{background:#fff;border-radius:12px;border:1.5px solid #e8e0d4;padding:14px 18px;box-shadow:0 1px 4px rgba(41,30,59,0.07)}
 .td-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid #e8e0d4}
 .td-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
 .td-mgr-photo{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid #e8e0d4}
-.td-mgr{font-size:15px;font-weight:700;color:#291e3b}.td-sub{font-size:10px;color:#9a8fa8}
-.td-total{font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;background:#f0b429;color:#291e3b;margin-left:auto;white-space:nowrap}
+.td-mgr{font-size:15px;font-weight:700;color:#291E3B}.td-sub{font-size:10px;color:#9a8fa8}
+.td-total{font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;background:#E5B237;color:#291E3B;margin-left:auto;white-space:nowrap}
 .td-col-hdr{display:grid;grid-template-columns:1fr auto auto;gap:8px;padding:0 0 5px;border-bottom:1px solid #e8e0d4;margin-bottom:3px}
 .td-col-lbl{font-size:9px;color:#9a8fa8;text-transform:uppercase;letter-spacing:0.07em;font-weight:600}
 .td-col-lbl.right{text-align:right}
-.td-rep-row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid #f5f0e8}
+.td-rep-row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid #F8F4ED}
 .td-rep-row:last-child{border-bottom:none}
-.td-rep-name{font-size:13px;color:#291e3b;font-weight:500}
-.td-rep-val{font-size:13px;font-weight:700;color:#291e3b;text-align:right;min-width:60px}
+.td-rep-name{font-size:13px;color:#291E3B;font-weight:500}
+.td-rep-val{font-size:13px;font-weight:700;color:#291E3B;text-align:right;min-width:60px}
 .td-rep-units{font-size:12px;color:#9a8fa8;text-align:right;min-width:32px}
-.botbar{padding:10px 28px;display:flex;align-items:center;gap:10px;background:#291e3b;border-top:2px solid #3d2d55;flex-shrink:0}
+.botbar{padding:10px 28px;display:flex;align-items:center;gap:10px;background:#291E3B;border-top:2px solid #3d2d55;flex-shrink:0}
 .btn{font-size:12px;color:#a89bc0;background:#3d2d55;border:1px solid #4a3a5c;border-radius:8px;padding:6px 14px;cursor:pointer}
 .btn:hover{color:#fff;background:#4a3a5c}
-.btn.hi{color:#291e3b;background:#f0b429;border-color:#f0b429;font-weight:600}
+.btn.hi{color:#291E3B;background:#E5B237;border-color:#E5B237;font-weight:600}
 </style>
 </head>
 <body>
@@ -77,7 +78,7 @@ body{background:#f5f0e8;font-family:system-ui,-apple-system,sans-serif;margin:0;
       <span class="brand-name">Activated Insights</span>
       <div class="brand-divider"></div>
       <span class="sales-label">Sales Floor · MTD</span>
-      <span class="updated">Updated Jun 17, 2026 7AM</span>
+      <span class="updated">Updated Jun 18, 2026 · 6:13 AM</span>
     </div>
     <div style="display:flex;align-items:center;gap:12px">
       <span class="slide-counter" id="counter">1 / 13</span>
@@ -102,55 +103,55 @@ const MGRS={
 };
 const TL={'sl':'Senior Living','hbc':'Home-Based Care','ent':'Enterprise','bdr-sl':'BDR · SL','bdr-hbc':'BDR · HBC','bdr-ent':'BDR · Enterprise'};
 const AE=[
-  {name:'Cait Lee',team:'sl',calls:86,msched:4,acv:4325.28,units:1},
+  {name:'Cait Lee',team:'sl',calls:95,msched:6,acv:4325.28,units:1},
   {name:'Gannon Sedlak',team:'sl',calls:123,msched:4,acv:2292.00,units:1},
-  {name:'Shelley Daenzer',team:'sl',calls:77,msched:0,acv:9188.70,units:3},
-  {name:'Jasmine Wieliczko',team:'sl',calls:312,msched:2,acv:3006.48,units:2},
-  {name:'Colby Williams',team:'sl',calls:105,msched:5,acv:18532.00,units:2},
-  {name:'Grace Grady',team:'sl',calls:534,msched:13,acv:13445.00,units:2},
-  {name:'Drew Garside',team:'sl',calls:303,msched:20,acv:2868.00,units:1},
-  {name:'Logan Hurd',team:'sl',calls:462,msched:18,acv:17017.80,units:4},
+  {name:'Shelley Daenzer',team:'sl',calls:44,msched:1,acv:9188.70,units:4},
+  {name:'Jasmine Wieliczko',team:'sl',calls:334,msched:0,acv:3952.56,units:3},
+  {name:'Colby Williams',team:'sl',calls:109,msched:5,acv:18532.00,units:2},
+  {name:'Grace Grady',team:'sl',calls:577,msched:13,acv:13445.00,units:2},
+  {name:'Drew Garside',team:'sl',calls:320,msched:21,acv:2868.00,units:1},
+  {name:'Logan Hurd',team:'sl',calls:490,msched:20,acv:17017.80,units:4},
   {name:'Julia Carr',team:'sl',calls:0,msched:0,acv:0,units:0},
   {name:'Caden Lowrance',team:'sl',calls:37,msched:0,acv:0,units:0},
-  {name:'Julia Blackwell',team:'sl',calls:288,msched:9,acv:5104.44,units:2},
+  {name:'Julia Blackwell',team:'sl',calls:313,msched:9,acv:5104.44,units:2},
   {name:'Isabella Cura',team:'sl',calls:93,msched:1,acv:0,units:0},
   {name:'Evan Baxter',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Josh Gayne',team:'sl',calls:318,msched:0,acv:0,units:0},
-  {name:'Bennet Bleil',team:'hbc',calls:378,msched:7,acv:5061.00,units:4},
-  {name:'Caden Noble',team:'hbc',calls:427,msched:29,acv:22920.60,units:4},
-  {name:'Chris Pacis',team:'hbc',calls:270,msched:5,acv:20047.80,units:8},
+  {name:'Josh Gayne',team:'sl',calls:348,msched:1,acv:0,units:0},
+  {name:'Bennet Bleil',team:'hbc',calls:395,msched:7,acv:5997.60,units:5},
+  {name:'Caden Noble',team:'hbc',calls:445,msched:31,acv:26148.60,units:6},
+  {name:'Chris Pacis',team:'hbc',calls:287,msched:7,acv:20047.80,units:8},
   {name:'Dan Arzhanov',team:'hbc',calls:1,msched:0,acv:0,units:0},
-  {name:'Ethan Hatch',team:'hbc',calls:534,msched:13,acv:3824.28,units:2},
-  {name:'Kyler Coles',team:'hbc',calls:83,msched:2,acv:10547.88,units:5},
-  {name:'Nicholas Reis',team:'hbc',calls:200,msched:5,acv:3150.88,units:4},
-  {name:'Tony Humphreys',team:'hbc',calls:170,msched:16,acv:14335.12,units:5},
-  {name:'Travis Barton',team:'hbc',calls:450,msched:24,acv:11801.52,units:5},
+  {name:'Ethan Hatch',team:'hbc',calls:574,msched:14,acv:3824.28,units:2},
+  {name:'Kyler Coles',team:'hbc',calls:99,msched:2,acv:10547.88,units:5},
+  {name:'Nicholas Reis',team:'hbc',calls:260,msched:7,acv:3150.88,units:4},
+  {name:'Tony Humphreys',team:'hbc',calls:190,msched:17,acv:14335.12,units:5},
+  {name:'Travis Barton',team:'hbc',calls:490,msched:24,acv:12042.72,units:6},
   {name:'Cody Klinger',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Brett Keys',team:'hbc',calls:359,msched:21,acv:4584.00,units:2},
-  {name:'Daniel Bonilla',team:'hbc',calls:301,msched:15,acv:9537.40,units:5},
-  {name:'Jaxson Hellbusch',team:'hbc',calls:363,msched:11,acv:7517.60,units:3},
-  {name:'Jordan Bailey',team:'hbc',calls:513,msched:19,acv:2580.00,units:2},
-  {name:'Kaleb Polk',team:'hbc',calls:403,msched:8,acv:2439.84,units:1},
-  {name:'Riley Pettegrew',team:'hbc',calls:427,msched:23,acv:10067.00,units:5},
-  {name:'Tanner Schill',team:'hbc',calls:411,msched:8,acv:17177.68,units:6},
-  {name:'Clayton Jensen',team:'hbc',calls:196,msched:16,acv:10646.03,units:13},
-  {name:'Del Jenkins',team:'hbc',calls:0,msched:6,acv:25159.44,units:16},
-  {name:'Jessica Downing',team:'hbc',calls:100,msched:28,acv:22492.08,units:10},
-  {name:'Luke DeMarcus',team:'hbc',calls:393,msched:14,acv:47218.80,units:4},
-  {name:'Mechell Howard',team:'hbc',calls:501,msched:16,acv:9171.00,units:4},
+  {name:'Brett Keys',team:'hbc',calls:401,msched:21,acv:4584.00,units:2},
+  {name:'Daniel Bonilla',team:'hbc',calls:324,msched:16,acv:9537.40,units:5},
+  {name:'Jaxson Hellbusch',team:'hbc',calls:405,msched:12,acv:7517.60,units:3},
+  {name:'Jordan Bailey',team:'hbc',calls:550,msched:20,acv:5071.00,units:3},
+  {name:'Kaleb Polk',team:'hbc',calls:419,msched:9,acv:3735.84,units:2},
+  {name:'Riley Pettegrew',team:'hbc',calls:470,msched:24,acv:10067.00,units:5},
+  {name:'Tanner Schill',team:'hbc',calls:446,msched:8,acv:17838.64,units:7},
+  {name:'Clayton Jensen',team:'hbc',calls:202,msched:16,acv:10880.63,units:14},
+  {name:'Del Jenkins',team:'hbc',calls:0,msched:6,acv:26306.64,units:17},
+  {name:'Jessica Downing',team:'hbc',calls:101,msched:28,acv:22492.08,units:10},
+  {name:'Luke DeMarcus',team:'hbc',calls:432,msched:18,acv:47218.80,units:4},
+  {name:'Mechell Howard',team:'hbc',calls:525,msched:18,acv:9171.00,units:4},
   {name:'Trevon Hymer',team:'hbc',calls:119,msched:0,acv:0,units:0},
   {name:'Laurie Kaiser',team:'ent',calls:0,msched:0,acv:0,units:0},
   {name:'Shawn Zbranek',team:'ent',calls:0,msched:0,acv:0,units:0},
   {name:'Lucas Brandt',team:'ent',calls:0,msched:0,acv:0,units:0},
 ];
 const BDR=[
-  {name:'Alice Borg',team:'bdr-hbc',calls:1000,msched:28,sals:18,sourced:14000},
-  {name:'Jack Satterthwaite',team:'bdr-ent',calls:883,msched:2,sals:1,sourced:0},
-  {name:'Ty Konold',team:'bdr-hbc',calls:852,msched:29,sals:6,sourced:17000},
-  {name:'Elliot Bryant',team:'bdr-sl',calls:775,msched:3,sals:0,sourced:0},
-  {name:'Ben Durgin',team:'bdr-hbc',calls:724,msched:8,sals:5,sourced:1300},
-  {name:'Robin Call',team:'bdr-sl',calls:263,msched:2,sals:1,sourced:0},
-  {name:'Xavier Pomales',team:'bdr-sl',calls:357,msched:0,sals:0,sourced:0},
+  {name:'Alice Borg',team:'bdr-hbc',calls:1100,msched:32,sals:20,sourced:16000},
+  {name:'Ty Konold',team:'bdr-hbc',calls:926,msched:30,sals:7,sourced:20000},
+  {name:'Jack Satterthwaite',team:'bdr-ent',calls:925,msched:2,sals:1,sourced:0},
+  {name:'Elliot Bryant',team:'bdr-sl',calls:808,msched:3,sals:0,sourced:0},
+  {name:'Ben Durgin',team:'bdr-hbc',calls:803,msched:9,sals:5,sourced:1300},
+  {name:'Xavier Pomales',team:'bdr-sl',calls:423,msched:0,sals:0,sourced:0},
+  {name:'Robin Call',team:'bdr-sl',calls:268,msched:2,sals:1,sourced:0},
   {name:'Brad Minton',team:'bdr-sl',calls:0,msched:1,sals:0,sourced:0},
 ];
 const PHOTOS={
@@ -246,9 +247,9 @@ const SLIDES=[
   {tags:['tag-sl','tag-mtd'],t:['Senior Living','Month to Date'],h:'Top Senior Living AEs',sub:'Closed ACV this month',fn:()=>podHTML(top3(AE,'acv','sl'),r=>fa(r.acv),'')},
   {tags:['tag-hbc','tag-mtd'],t:['Home-Based Care','Month to Date'],h:'Top Home-Based Care AEs',sub:'Closed ACV this month',fn:()=>podHTML(top3(AE,'acv','hbc'),r=>fa(r.acv),'')},
   {type:'team-deals'},
-  {tags:['tag-team','tag-mtd'],t:["Deana's Team",'Month to Date'],h:'Top closed ACV',sub:"Deana Ferguson's team · closed ACV this month",fn:()=>podHTML(topNFromList(AE,'acv',MGRS.Deana.reps),r=>fa(r.acv),'')},
-  {tags:['tag-team','tag-mtd'],t:["Deana's Team",'Month to Date'],h:'Top meetings booked',sub:"Deana Ferguson's team · meetings scheduled MTD",fn:()=>podHTML(topNFromList(AE,'msched',MGRS.Deana.reps),r=>fn(r.msched),'meetings')},
-  {tags:['tag-team','tag-mtd'],t:["Deana's Team",'Month to Date'],h:'Top outbound calls',sub:"Deana Ferguson's team · calls MTD",fn:()=>podHTML(topNFromList(AE,'calls',MGRS.Deana.reps),r=>fn(r.calls),'calls')},
+  {tags:['tag-team','tag-mtd'],t:['Team Deana','Month to Date'],h:'Top closed ACV',sub:'Team Deana · closed ACV this month',fn:()=>podHTML(topNFromList(AE,'acv',MGRS.Deana.reps),r=>fa(r.acv),'')},
+  {tags:['tag-team','tag-mtd'],t:['Team Deana','Month to Date'],h:'Top meetings booked',sub:'Team Deana · meetings scheduled MTD',fn:()=>podHTML(topNFromList(AE,'msched',MGRS.Deana.reps),r=>fn(r.msched),'meetings')},
+  {tags:['tag-team','tag-mtd'],t:['Team Deana','Month to Date'],h:'Top outbound calls',sub:'Team Deana · calls MTD',fn:()=>podHTML(topNFromList(AE,'calls',MGRS.Deana.reps),r=>fn(r.calls),'calls')},
   {tags:['tag-bdr','tag-mtd'],t:['BDR','Month to Date'],h:'Top caller',sub:'BDRs · outbound calls MTD',fn:()=>podHTML(top3(BDR,'calls'),r=>fn(r.calls),'calls')},
   {tags:['tag-bdr','tag-mtd'],t:['BDR','Month to Date'],h:'Top meeting booked',sub:'BDRs · meetings scheduled MTD',fn:()=>podHTML(top3(BDR,'msched'),r=>fn(r.msched),'meetings')},
   {tags:['tag-bdr','tag-mtd'],t:['BDR','Month to Date'],h:'Top SALs',sub:'BDRs · sales accepted leads MTD',fn:()=>podHTML(top3(BDR,'sals'),r=>fn(r.sals),'SALs')},
