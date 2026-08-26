@@ -36,6 +36,13 @@ body{background:#F8F4ED;font-family:system-ui,-apple-system,sans-serif;margin:0;
 .headline{font-size:28px;font-weight:700;color:#291e3b;line-height:1.2}
 .subline{font-size:12px;color:#9a8fa8;margin-top:3px}
 .podium{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:4px}
+.podium-single{display:flex;justify-content:center;align-items:center;flex:1;margin-top:8px}
+.pcard.solo{padding:40px 64px;max-width:340px}
+.pcard.solo .av-photo,.pcard.solo .av{width:88px;height:88px;font-size:26px}
+.pcard.solo .pname{font-size:24px;margin-bottom:4px}
+.pcard.solo .pteam{font-size:12px;margin-bottom:16px}
+.pcard.solo .pval{font-size:46px}
+.pcard.solo .punit{font-size:13px}
 .pcard{background:#fff;border-radius:12px;border:1.5px solid #e8e0d4;padding:20px 16px;text-align:center;box-shadow:0 1px 4px rgba(41,30,59,0.07);display:flex;flex-direction:column;align-items:center}
 .pcard.p1{border-color:#E5B237;background:#fffbf0;box-shadow:0 3px 12px rgba(240,180,41,0.18)}
 .medal{font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;display:inline-block;margin-bottom:12px}
@@ -81,6 +88,15 @@ body{background:#F8F4ED;font-family:system-ui,-apple-system,sans-serif;margin:0;
 .welcome-av{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;margin-bottom:10px;background:#ede8f5;color:#78429A;border:2px solid #e8e0d4}
 .welcome-name{font-size:16px;font-weight:700;color:#291e3b;margin-bottom:4px}
 .welcome-role{font-size:12px;color:#9a8fa8;line-height:1.3}
+.spiced-list{display:flex;flex-direction:column;gap:7px;margin-top:6px;flex:1}
+.spiced-row{display:flex;align-items:center;gap:16px;background:#fff;border:1.5px solid #e8e0d4;border-radius:10px;padding:10px 16px}
+.spiced-badge{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;flex-shrink:0}
+.spiced-title{font-size:14px;font-weight:700;color:#291e3b;width:110px;flex-shrink:0}
+.spiced-desc{font-size:12px;color:#291e3b;flex:1;line-height:1.35}
+.spiced-quote{font-size:11px;color:#78429A;font-style:italic;background:#ede8f5;border-radius:8px;padding:6px 12px;flex-shrink:0;max-width:230px;text-align:right}
+.spiced-callout{background:#F3D9A1;border-radius:10px;padding:12px 18px;display:flex;gap:16px;align-items:flex-start;margin-top:2px}
+.spiced-callout-label{font-size:10px;font-weight:800;color:#291e3b;text-transform:uppercase;letter-spacing:0.06em;width:90px;flex-shrink:0;line-height:1.3}
+.spiced-callout-text{font-size:12px;color:#291e3b;line-height:1.4}
 .botbar{padding:10px 28px;display:flex;align-items:center;gap:10px;background:#291e3b;border-top:2px solid #3d2d55;flex-shrink:0}
 .btn{font-size:12px;color:#a89bc0;background:#3d2d55;border:1px solid #4a3a5c;border-radius:8px;padding:6px 14px;cursor:pointer}
 .btn:hover{color:#fff;background:#4a3a5c}
@@ -98,7 +114,7 @@ body{background:#F8F4ED;font-family:system-ui,-apple-system,sans-serif;margin:0;
       <span class="updated">Updated Aug 26, 2026 6:20AM</span>
     </div>
     <div style="display:flex;align-items:center;gap:12px">
-      <span class="slide-counter" id="counter">1 / 13</span>
+      <span class="slide-counter" id="counter">1 / 11</span>
       <div class="ndots" id="ndots"></div>
     </div>
   </div>
@@ -240,6 +256,17 @@ function topNFromList(arr,key,names){
 }
 function podHTML(reps,vFn,unit){
   if(!reps.length)return'<p style="color:#9a8fa8;font-size:14px;padding:20px 0">No data yet!</p>';
+  if(reps.length===1){
+    const r=reps[0];
+    return`<div class="podium-single"><div class="pcard p1 solo">
+      <span class="medal m1">MVP</span>
+      ${avatarHTML(r)}
+      <div class="pname">${r.name}</div>
+      <div class="pteam">${TL[r.team]||r.team}</div>
+      <div class="pval">${vFn(r)}</div>
+      ${unit?`<div class="punit">${unit}</div>`:''}
+    </div></div>`;
+  }
   return'<div class="podium">'+['1st','2nd','3rd'].slice(0,reps.length).map((pl,i)=>`
     <div class="pcard${i===0?' p1':''}">
       <span class="medal m${i+1}">${pl}</span>
@@ -289,6 +316,25 @@ function welcomeHTML(){
     return`<div class="welcome-card">${av}<div class="welcome-name">${p.name}</div><div class="welcome-role">${p.role}</div></div>`;
   }).join('')+'</div>';
 }
+const SPICED=[
+  {k:'S',title:'Situation',color:'#78429A',desc:'Segment, size, systems, and how they work today. Two or three questions, then move.',quote:'Does this fit our ICP?'},
+  {k:'P',title:'Pain',color:'#EA8972',desc:'The specific problem, in their words. An incident, not an adjective.',quote:'Can the champion state it themselves?'},
+  {k:'I',title:'Impact',color:'#3CA292',desc:'That pain in dollars or hours. The biggest lever in the model.',quote:'Did the buyer say the number, or did we?'},
+  {k:'C',title:'Critical Event',color:'#E5B237',desc:'A dated event with a consequence. This is what makes it this quarter.',quote:'What breaks if the date is missed?'},
+  {k:'E',title:'Economic Buyer',color:'#4093C4',desc:'Who signs without asking anyone. Owner, CEO, ED, COO.',quote:'Have we actually met them, or just the champion?'},
+  {k:'D',title:'Decision',color:'#5db243',desc:'The process, the criteria, the committee, and the paperwork.',quote:'Has the champion presented internally and reported back?'}
+];
+function spicedHTML(){
+  return'<div class="spiced-list">'+SPICED.map(s=>`
+    <div class="spiced-row">
+      <span class="spiced-badge" style="background:${s.color}">${s.k}</span>
+      <span class="spiced-title">${s.title}</span>
+      <span class="spiced-desc">${s.desc}</span>
+      <span class="spiced-quote">${s.quote}</span>
+    </div>`).join('')+`
+    <div class="spiced-callout"><span class="spiced-callout-label">The test to keep</span><span class="spiced-callout-text">A real Critical Event has a consequence if it is missed. If nothing happens when the date passes, it is a date, not a critical event. And never do the math for them: a number you calculate is a vendor claim, a number they calculate is their business case.</span></div>
+  </div>`;
+}
 const SLIDES=[
   {tags:['tag-ae','tag-mtd'],t:['AE','Month to Date'],h:'Top caller',sub:'Account executives · outbound calls MTD',fn:()=>podHTML(top3(AE,'calls'),r=>fn(r.calls),'calls')},
   {tags:['tag-ae','tag-mtd'],t:['AE','Month to Date'],h:'Top meeting booked',sub:'Account executives · meetings scheduled MTD',fn:()=>podHTML(top3(AE,'msched'),r=>fn(r.msched),'meetings')},
@@ -297,14 +343,14 @@ const SLIDES=[
   {tags:['tag-hbc','tag-mtd'],t:['Home-Based Care','Month to Date'],h:'Top Home-Based Care AEs',sub:'Closed ACV this month',fn:()=>podHTML(top3(AE,'acv','hbc'),r=>fa(r.acv),'')},
   {type:'team-deals'},
   {tags:['tag-team','tag-mtd'],t:["Deana's Team",'Month to Date'],h:'Top closed ACV',sub:"Deana Ferguson's team · closed ACV this month",fn:()=>podHTML(topNFromList(AE,'acv',MGRS.Deana.reps),r=>fa(r.acv),'')},
-  {tags:['tag-team','tag-mtd'],t:["Deana's Team",'Month to Date'],h:'Top meetings booked',sub:"Deana Ferguson's team · meetings scheduled MTD",fn:()=>podHTML(topNFromList(AE,'msched',MGRS.Deana.reps),r=>fn(r.msched),'meetings')},
-  {tags:['tag-team','tag-mtd'],t:["Deana's Team",'Month to Date'],h:'Top outbound calls',sub:"Deana Ferguson's team · calls MTD",fn:()=>podHTML(topNFromList(AE,'calls',MGRS.Deana.reps),r=>fn(r.calls),'calls')},
   {tags:['tag-bdr','tag-mtd'],t:['BDR','Month to Date'],h:'Top caller',sub:'BDRs · outbound calls MTD',fn:()=>podHTML(top3(BDR,'calls'),r=>fn(r.calls),'calls')},
   {tags:['tag-bdr','tag-mtd'],t:['BDR','Month to Date'],h:'Top meeting booked',sub:'BDRs · meetings scheduled MTD',fn:()=>podHTML(top3(BDR,'msched'),r=>fn(r.msched),'meetings')},
   {tags:['tag-bdr','tag-mtd'],t:['BDR','Month to Date'],h:'Top SALs',sub:'BDRs · sales accepted leads MTD',fn:()=>podHTML(top3(BDR,'sals'),r=>fn(r.sals),'SALs')},
   {tags:['tag-bdr','tag-mtd'],t:['BDR','Month to Date'],h:'Top deals sourced',sub:'BDRs · sourced closed ACV MTD',fn:()=>podHTML(top3(BDR,'sourced'),r=>fa(r.sourced),'')},
+  {type:'spiced'},
 ];
 function slideHTML(s){
+  if(s.type==='spiced')return`<div class="tags"><span class="tag tag-team">Desk Reference</span></div><div class="headline">SPICED — Diagnose before you prescribe.</div><div class="subline">Sales qualification framework</div>${spicedHTML()}`;
   if(s.type==='welcome')return`<div class="tags"><span class="tag tag-team">Welcome</span></div><div class="headline">Welcome to the team!</div><div class="subline">Our newest team members</div>${welcomeHTML()}`;
   if(s.type==='team-deals')return`<div class="tags"><span class="tag tag-team">Team Deals</span><span class="tag tag-mtd">Month to Date</span></div><div class="headline">Top closed ACV by team</div><div class="subline">Top 5 reps per team · ACV + units closed</div>${teamDealsHTML()}`;
   return`<div class="tags">${s.tags.map((t,i)=>`<span class="tag ${t}">${s.t[i]}</span>`).join('')}</div><div class="headline">${s.h}</div><div class="subline">${s.sub}</div>${s.fn()}`;
