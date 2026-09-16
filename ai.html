@@ -434,13 +434,11 @@ function captainsHTML(){
     const av=photo?`<img class="captain-photo" src="${photo}" alt="${t.captain}">`:`<div class="captain-av">${ini(t.captain)}</div>`;
     const pts=TEAM_POINTS[t.mgrKey];
     const ptsDisplay=(pts===null||pts===undefined)?'--':pts;
-    const ppa=TEAM_PPA[t.mgrKey];
-    const ppaBadge=(ppa===null||ppa===undefined)?'':`<div class="captain-ppa">${ppa.toFixed(2)}<span>PTS/AE</span></div>`;
     const mvp=TEAM_MVP[t.mgrKey];
     const mvpLine=mvp?`<div class="captain-mvp">MVP: ${mvp.name} \u00b7 ${mvp.points} Points</div>`:'';
     const bonus=TEAM_BONUS[t.mgrKey];
     const bonusLine=bonus?`<div class="captain-bonus">${bonus}</div>`:'';
-    return`<div class="captain-card">${av}<div class="captain-info"><div class="captain-team">${t.team}</div><div class="captain-points-row"><div class="captain-points">${ptsDisplay}</div>${ppaBadge}</div><div class="captain-points-label">Points</div>${bonusLine}${mvpLine}</div></div>`;
+    return`<div class="captain-card">${av}<div class="captain-info"><div class="captain-team">${t.team}</div><div class="captain-points">${ptsDisplay}</div><div class="captain-points-label">Points</div>${bonusLine}${mvpLine}</div></div>`;
   }).join('')+'</div>';
 }
 const RULES=[
