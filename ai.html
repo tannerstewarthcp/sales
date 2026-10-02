@@ -45,9 +45,6 @@ body{background:#F8F4ED;font-family:system-ui,-apple-system,sans-serif;margin:0;
 .yd-val{text-align:right;font-weight:800;font-size:30px}
 .yd-hdr .yd-val{font-size:13px}
 
-/* First-of-month watermark (remove once October data comes in) */
-.fom-watermark{position:fixed;inset:0;z-index:9999;pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.fom-watermark span{transform:rotate(-18deg);font-family:'Archivo',Arial,sans-serif;font-weight:800;font-size:clamp(28px,5.2vw,88px);line-height:1.1;text-align:center;color:#78429A;opacity:.2;max-width:92vw;white-space:normal}
 
 .tag-sl{background:#78429A;color:#fff}
 .tag-hbc{background:#291e3b;color:#E5B237}
@@ -123,6 +120,9 @@ body{background:#F8F4ED;font-family:system-ui,-apple-system,sans-serif;margin:0;
 .comp-eyebrow{font-size:12px;font-weight:700;color:#9a8fa8;text-transform:uppercase;letter-spacing:0.1em}
 .captain-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:12px;margin-top:4px;flex:1;min-height:0}
 .captain-card{position:relative;border-radius:14px;overflow:hidden;background:#291e3b;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(41,30,59,0.18);min-height:0;min-width:0}
+.comp-ribbon{position:absolute;top:10px;right:14px;z-index:3;filter:drop-shadow(0 2px 4px rgba(41,30,59,.35))}
+.comp-winner{box-shadow:0 0 0 3px #E5B237,0 2px 8px rgba(41,30,59,0.18)}
+
 .captain-photo{width:100%;flex:1;min-height:0;min-width:0;object-fit:contain;object-position:center center;background:#1c1530}
 .captain-av{width:100%;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;background:linear-gradient(160deg,#78429A,#291e3b);color:#f0dfff}
 .captain-info{background:#fff;padding:8px 8px 10px;text-align:center;flex-shrink:0}
@@ -218,101 +218,105 @@ const MGRS={
 };
 const TL={'sl':'Senior Living','hbc':'Home-Based Care','ent':'Enterprise','bdr-sl':'BDR · SL','bdr-hbc':'BDR · HBC','bdr-ent':'BDR · Enterprise'};
 const AE=[
-  {name:'Cait Lee',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Gannon Sedlak',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Shelley Daenzer',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Jasmine Wieliczko',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Colby Williams',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Grace Grady',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Drew Garside',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Logan Hurd',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Julia Carr',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Caden Lowrance',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Julia Blackwell',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Isabella Cura',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Evan Baxter',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Robert Stevenson',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Kevin Castle',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Ulukan Ulutas',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Chase Harris',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Giovanni Frugone',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Josh Gayne',team:'sl',calls:0,msched:0,acv:0,units:0},
-  {name:'Bennet Bleil',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Caden Noble',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Chris Pacis',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Dan Arzhanov',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Ethan Hatch',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Kyler Coles',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Nicholas Reis',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Tony Humphreys',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Travis Barton',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Cody Klingler',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Brett Keys',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Daniel Bonilla',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Jaxson Hellbusch',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Jordan Bailey',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Kaleb Polk',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Riley Pettegrew',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Tanner Schill',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Jared Godfrey',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Gracie Meegan',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Josh Atkinson',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Clayton Jensen',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Del Jenkins',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Jessica Downing',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Luke DeMarcus',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Mechell Howard',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Trevon Hymer',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Jerel Starks',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Tyler Olshansky',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Laurie Kaiser',team:'ent',calls:0,msched:0,acv:0,units:0},
-  {name:'Shawn Zbranek',team:'ent',calls:0,msched:0,acv:0,units:0},
-  {name:'Lucas Brandt',team:'ent',calls:0,msched:0,acv:0,units:0},
-  {name:'Matthew Winkler',team:'ent',calls:0,msched:0,acv:0,units:0},
-  {name:'Andrew Stratton',team:'ent',calls:0,msched:0,acv:0,units:0},
-  {name:'Ty Konold',team:'hbc',calls:0,msched:0,acv:0,units:0},
-  {name:'Jack Satterthwaite',team:'ent',calls:0,msched:0,acv:0,units:0},
-  {name:'Kevin Hayes',team:'hbc',calls:0,msched:0,acv:0,units:0},
+  {name:'Cait Lee',team:'sl',calls:5,msched:0,acv:0,units:0,mheld:0},
+  {name:'Gannon Sedlak',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Shelley Daenzer',team:'sl',calls:10,msched:1,acv:0,units:0,mheld:0},
+  {name:'Jasmine Wieliczko',team:'sl',calls:16,msched:0,acv:0,units:0,mheld:0},
+  {name:'Colby Williams',team:'sl',calls:40,msched:2,acv:0,units:0,mheld:0},
+  {name:'Grace Grady',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Drew Garside',team:'sl',calls:40,msched:0,acv:0,units:0,mheld:0},
+  {name:'Logan Hurd',team:'sl',calls:40,msched:0,acv:0,units:0,mheld:0},
+  {name:'Julia Carr',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Caden Lowrance',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Julia Blackwell',team:'sl',calls:41,msched:0,acv:0,units:0,mheld:0},
+  {name:'Isabella Cura',team:'sl',calls:32,msched:3,acv:0,units:0,mheld:1},
+  {name:'Evan Baxter',team:'sl',calls:36,msched:0,acv:0,units:0,mheld:0},
+  {name:'Robert Stevenson',team:'sl',calls:14,msched:0,acv:0,units:0,mheld:0},
+  {name:'Kevin Castle',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Ulukan Ulutas',team:'sl',calls:37,msched:0,acv:0,units:0,mheld:0},
+  {name:'Chase Harris',team:'hbc',calls:52,msched:0,acv:0,units:0,mheld:0},
+  {name:'Giovanni Frugone',team:'hbc',calls:24,msched:0,acv:0,units:0,mheld:0},
+  {name:'Josh Gayne',team:'sl',calls:36,msched:0,acv:0,units:0,mheld:0},
+  {name:'Bennet Bleil',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Caden Noble',team:'hbc',calls:40,msched:1,acv:0,units:0,mheld:0},
+  {name:'Chris Pacis',team:'hbc',calls:23,msched:1,acv:2292,units:1,mheld:0},
+  {name:'Dan Arzhanov',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Ethan Hatch',team:'hbc',calls:42,msched:3,acv:0,units:0,mheld:0},
+  {name:'Kyler Coles',team:'hbc',calls:20,msched:0,acv:0,units:0,mheld:0},
+  {name:'Nicholas Reis',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Tony Humphreys',team:'hbc',calls:30,msched:4,acv:0,units:0,mheld:0},
+  {name:'Travis Barton',team:'hbc',calls:60,msched:2,acv:0,units:0,mheld:0},
+  {name:'Cody Klingler',team:'hbc',calls:31,msched:0,acv:0,units:0,mheld:0},
+  {name:'Brett Keys',team:'hbc',calls:1,msched:0,acv:0,units:0,mheld:0},
+  {name:'Daniel Bonilla',team:'hbc',calls:40,msched:0,acv:0,units:0,mheld:0},
+  {name:'Jaxson Hellbusch',team:'hbc',calls:43,msched:2,acv:4240.2,units:2,mheld:0},
+  {name:'Jordan Bailey',team:'hbc',calls:40,msched:2,acv:2292,units:1,mheld:0},
+  {name:'Kaleb Polk',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Riley Pettegrew',team:'hbc',calls:47,msched:2,acv:1475.19,units:1,mheld:0},
+  {name:'Tanner Schill',team:'hbc',calls:35,msched:0,acv:0,units:0,mheld:0},
+  {name:'Jared Godfrey',team:'hbc',calls:56,msched:1,acv:0,units:0,mheld:0},
+  {name:'Gracie Meegan',team:'hbc',calls:45,msched:8,acv:0,units:0,mheld:0},
+  {name:'Josh Atkinson',team:'hbc',calls:62,msched:4,acv:0,units:0,mheld:0},
+  {name:'Clayton Jensen',team:'hbc',calls:11,msched:0,acv:0,units:0,mheld:2},
+  {name:'Del Jenkins',team:'hbc',calls:2,msched:0,acv:0,units:0,mheld:0},
+  {name:'Jessica Downing',team:'hbc',calls:5,msched:5,acv:0,units:0,mheld:8},
+  {name:'Luke DeMarcus',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Mechell Howard',team:'hbc',calls:26,msched:2,acv:3228,units:1,mheld:6},
+  {name:'Trevon Hymer',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Jerel Starks',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:3},
+  {name:'Tyler Olshansky',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Laurie Kaiser',team:'ent',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Shawn Zbranek',team:'ent',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Lucas Brandt',team:'ent',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Matthew Winkler',team:'ent',calls:8,msched:0,acv:0,units:0,mheld:0},
+  {name:'Andrew Stratton',team:'ent',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Ty Konold',team:'hbc',calls:51,msched:1,acv:2988,units:1,mheld:0},
+  {name:'Jack Satterthwaite',team:'ent',calls:106,msched:1,acv:0,units:0,mheld:0},
+  {name:'Kevin Hayes',team:'hbc',calls:8,msched:2,acv:0,units:0,mheld:0},
 ];
-// Yesterday-only AE activity (refresh daily). Fields: mgr (SF manager), calls, msched (booked), mcomp (completed). Current: Wed Sep 30
+const REP_MGR={'Brett Keys':'Darin Ellsworth','Caden Noble':'Caleb Hendricks','Cait Lee':'Michael Walpole','Chase Harris':'Caleb Hendricks','Chris Pacis':'Caleb Hendricks','Clayton Jensen':'Deana Ferguson','Cody Klingler':'Caleb Hendricks','Colby Williams':'Michael Walpole','Daniel Bonilla':'Darin Ellsworth','Del Jenkins':'Don Williams','Drew Garside':'Matthew McClure','Ethan Hatch':'Caleb Hendricks','Evan Baxter':'Michael Walpole','Giovanni Frugone':'Caleb Hendricks','Gracie Meegan':'Darin Ellsworth','Isabella Cura':'Deana Ferguson','Jack Satterthwaite':'Darin Ellsworth','Jared Godfrey':'Darin Ellsworth','Jasmine Wieliczko':'Matthew McClure','Jaxson Hellbusch':'Darin Ellsworth','Jessica Downing':'Deana Ferguson','Jordan Bailey':'Darin Ellsworth','Josh Atkinson':'Darin Ellsworth','Josh Gayne':'Matthew McClure','Julia Blackwell':'Michael Walpole','Kevin Castle':'Matthew McClure','Kevin Hayes':'Deana Ferguson','Kyler Coles':'Caleb Hendricks','Logan Hurd':'Matthew McClure','Matthew Winkler':'Don Williams','Mechell Howard':'Deana Ferguson','Nicholas Reis':'Caleb Hendricks','Riley Pettegrew':'Darin Ellsworth','Robert Stevenson':'Michael Walpole','Shelley Daenzer':'Michael Walpole','Tanner Schill':'Darin Ellsworth','Tony Humphreys':'Caleb Hendricks','Travis Barton':'Caleb Hendricks','Ty Konold':'Caleb Hendricks','Tyler Olshansky':'Deana Ferguson','Ulukan Ulutas':'Matthew McClure'};
+// Yesterday-only AE activity (refresh daily). Fields: mgr (SF manager), calls, msched (booked), mcomp (completed). Current: Thu Oct 1 (Sales Pacing Report daily grids)
 const AE_YDAY=[
-  {name:'Jordan Bailey',team:'hbc',mgr:'Darin Ellsworth',calls:79,msched:0,mcomp:4},
-  {name:'Jack Satterthwaite',team:'ent',mgr:'Darin Ellsworth',calls:79,msched:4,mcomp:2},
-  {name:'Nicholas Reis',team:'hbc',mgr:'Caleb Hendricks',calls:78,msched:0,mcomp:2},
-  {name:'Josh Atkinson',team:'hbc',mgr:'Darin Ellsworth',calls:64,msched:0,mcomp:3},
-  {name:'Jaxson Hellbusch',team:'hbc',mgr:'Darin Ellsworth',calls:62,msched:1,mcomp:6},
-  {name:'Gracie Meegan',team:'hbc',mgr:'Darin Ellsworth',calls:52,msched:5,mcomp:3},
-  {name:'Riley Pettegrew',team:'hbc',mgr:'Darin Ellsworth',calls:49,msched:2,mcomp:3},
-  {name:'Jared Godfrey',team:'hbc',mgr:'Darin Ellsworth',calls:48,msched:2,mcomp:0},
-  {name:'Ty Konold',team:'hbc',mgr:'Caleb Hendricks',calls:48,msched:0,mcomp:5},
-  {name:'Tony Humphreys',team:'hbc',mgr:'Caleb Hendricks',calls:43,msched:2,mcomp:0},
-  {name:'Travis Barton',team:'hbc',mgr:'Caleb Hendricks',calls:43,msched:2,mcomp:0},
-  {name:'Chris Pacis',team:'hbc',mgr:'Caleb Hendricks',calls:42,msched:2,mcomp:3},
-  {name:'Ethan Hatch',team:'hbc',mgr:'Caleb Hendricks',calls:42,msched:1,mcomp:3},
-  {name:'Clayton Jensen',team:'hbc',mgr:'Deana Ferguson',calls:34,msched:3,mcomp:0},
-  {name:'Tanner Schill',team:'hbc',mgr:'Darin Ellsworth',calls:30,msched:0,mcomp:5},
-  {name:'Kyler Coles',team:'hbc',mgr:'Caleb Hendricks',calls:28,msched:0,mcomp:3},
-  {name:'Jessica Downing',team:'hbc',mgr:'Deana Ferguson',calls:17,msched:3,mcomp:0},
-  {name:'Jasmine Wieliczko',team:'sl',mgr:'Matthew McClure',calls:17,msched:2,mcomp:0},
-  {name:'Robert Stevenson',team:'sl',mgr:'Michael Walpole',calls:30,msched:0,mcomp:0},
-  {name:'Shelley Daenzer',team:'sl',mgr:'Michael Walpole',calls:21,msched:0,mcomp:0},
-  {name:'Evan Baxter',team:'sl',mgr:'Michael Walpole',calls:38,msched:0,mcomp:0},
-  {name:'Colby Williams',team:'sl',mgr:'Michael Walpole',calls:42,msched:0,mcomp:0},
-  {name:'Julia Blackwell',team:'sl',mgr:'Michael Walpole',calls:48,msched:0,mcomp:0},
-  {name:'Ulukan Ulutas',team:'sl',mgr:'Matthew McClure',calls:44,msched:0,mcomp:0},
-  {name:'Drew Garside',team:'sl',mgr:'Matthew McClure',calls:50,msched:0,mcomp:0},
-  {name:'Logan Hurd',team:'sl',mgr:'Matthew McClure',calls:21,msched:0,mcomp:0},
-  {name:'Josh Gayne',team:'sl',mgr:'Matthew McClure',calls:49,msched:0,mcomp:0},
-  {name:'Del Jenkins',team:'hbc',mgr:'Don Williams',calls:17,msched:0,mcomp:0},
-  {name:'Matthew Winkler',team:'ent',mgr:'Don Williams',calls:31,msched:0,mcomp:0},
-  {name:'Kevin Hayes',team:'hbc',mgr:'Deana Ferguson',calls:8,msched:0,mcomp:0},
-  {name:'Isabella Cura',team:'sl',mgr:'Deana Ferguson',calls:14,msched:1,mcomp:0},
-  {name:'Brett Keys',team:'hbc',mgr:'Darin Ellsworth',calls:37,msched:1,mcomp:0},
-  {name:'Daniel Bonilla',team:'hbc',mgr:'Darin Ellsworth',calls:52,msched:0,mcomp:0},
-  {name:'Chase Harris',team:'hbc',mgr:'Caleb Hendricks',calls:23,msched:0,mcomp:0},
-  {name:'Giovanni Frugone',team:'hbc',mgr:'Caleb Hendricks',calls:45,msched:0,mcomp:0},
-  {name:'Cody Klingler',team:'hbc',mgr:'Caleb Hendricks',calls:41,msched:0,mcomp:0},
-  {name:'Caden Noble',team:'hbc',mgr:'Caleb Hendricks',calls:30,msched:0,mcomp:2},
+  {name:'Brett Keys',team:'hbc',mgr:'Darin Ellsworth',calls:1,msched:0,mcomp:0},
+  {name:'Caden Noble',team:'hbc',mgr:'Caleb Hendricks',calls:40,msched:2,mcomp:0},
+  {name:'Cait Lee',team:'sl',mgr:'Michael Walpole',calls:5,msched:1,mcomp:0},
+  {name:'Chase Harris',team:'hbc',mgr:'Caleb Hendricks',calls:44,msched:0,mcomp:0},
+  {name:'Chris Pacis',team:'hbc',mgr:'Caleb Hendricks',calls:23,msched:1,mcomp:0},
+  {name:'Clayton Jensen',team:'hbc',mgr:'Deana Ferguson',calls:11,msched:2,mcomp:0},
+  {name:'Cody Klingler',team:'hbc',mgr:'Caleb Hendricks',calls:30,msched:1,mcomp:0},
+  {name:'Colby Williams',team:'sl',mgr:'Michael Walpole',calls:40,msched:0,mcomp:0},
+  {name:'Daniel Bonilla',team:'hbc',mgr:'Darin Ellsworth',calls:38,msched:0,mcomp:0},
+  {name:'Del Jenkins',team:'hbc',mgr:'Don Williams',calls:2,msched:3,mcomp:0},
+  {name:'Drew Garside',team:'sl',mgr:'Matthew McClure',calls:40,msched:0,mcomp:0},
+  {name:'Ethan Hatch',team:'hbc',mgr:'Caleb Hendricks',calls:42,msched:2,mcomp:0},
+  {name:'Evan Baxter',team:'sl',mgr:'Michael Walpole',calls:36,msched:1,mcomp:0},
+  {name:'Giovanni Frugone',team:'hbc',mgr:'Caleb Hendricks',calls:24,msched:1,mcomp:0},
+  {name:'Gracie Meegan',team:'hbc',mgr:'Darin Ellsworth',calls:45,msched:11,mcomp:0},
+  {name:'Isabella Cura',team:'sl',mgr:'Deana Ferguson',calls:32,msched:1,mcomp:0},
+  {name:'Jack Satterthwaite',team:'ent',mgr:'Darin Ellsworth',calls:106,msched:1,mcomp:0},
+  {name:'Jared Godfrey',team:'hbc',mgr:'Darin Ellsworth',calls:56,msched:0,mcomp:0},
+  {name:'Jasmine Wieliczko',team:'sl',mgr:'Matthew McClure',calls:16,msched:2,mcomp:0},
+  {name:'Jaxson Hellbusch',team:'hbc',mgr:'Darin Ellsworth',calls:43,msched:5,mcomp:0},
+  {name:'Jessica Downing',team:'hbc',mgr:'Deana Ferguson',calls:5,msched:4,mcomp:0},
+  {name:'Jordan Bailey',team:'hbc',mgr:'Darin Ellsworth',calls:40,msched:1,mcomp:0},
+  {name:'Josh Atkinson',team:'hbc',mgr:'Darin Ellsworth',calls:62,msched:2,mcomp:0},
+  {name:'Josh Gayne',team:'sl',mgr:'Matthew McClure',calls:27,msched:0,mcomp:0},
+  {name:'Julia Blackwell',team:'sl',mgr:'Michael Walpole',calls:40,msched:0,mcomp:0},
+  {name:'Kevin Castle',team:'sl',mgr:'Matthew McClure',calls:0,msched:1,mcomp:0},
+  {name:'Kevin Hayes',team:'hbc',mgr:'Deana Ferguson',calls:5,msched:0,mcomp:0},
+  {name:'Kyler Coles',team:'hbc',mgr:'Caleb Hendricks',calls:19,msched:3,mcomp:0},
+  {name:'Logan Hurd',team:'sl',mgr:'Matthew McClure',calls:40,msched:1,mcomp:0},
+  {name:'Matthew Winkler',team:'ent',mgr:'Don Williams',calls:8,msched:3,mcomp:0},
+  {name:'Mechell Howard',team:'hbc',mgr:'Deana Ferguson',calls:26,msched:6,mcomp:0},
+  {name:'Nicholas Reis',team:'hbc',mgr:'Caleb Hendricks',calls:0,msched:2,mcomp:0},
+  {name:'Riley Pettegrew',team:'hbc',mgr:'Darin Ellsworth',calls:47,msched:1,mcomp:0},
+  {name:'Robert Stevenson',team:'sl',mgr:'Michael Walpole',calls:8,msched:3,mcomp:0},
+  {name:'Shelley Daenzer',team:'sl',mgr:'Michael Walpole',calls:9,msched:1,mcomp:0},
+  {name:'Tanner Schill',team:'hbc',mgr:'Darin Ellsworth',calls:35,msched:1,mcomp:0},
+  {name:'Tony Humphreys',team:'hbc',mgr:'Caleb Hendricks',calls:30,msched:1,mcomp:0},
+  {name:'Travis Barton',team:'hbc',mgr:'Caleb Hendricks',calls:60,msched:0,mcomp:0},
+  {name:'Ty Konold',team:'hbc',mgr:'Caleb Hendricks',calls:51,msched:2,mcomp:0},
+  {name:'Ulukan Ulutas',team:'sl',mgr:'Matthew McClure',calls:37,msched:0,mcomp:0},
 ];
 const BDR=[
   {name:'Alice Borg',team:'bdr-hbc',calls:0,msched:0,sals:0,sourced:0},
@@ -380,14 +384,14 @@ function topNFromList(arr,key,names){
   const seen={};arr.forEach(r=>{if(names.includes(r.name)&&(!seen[r.name]||(r[key]||0)>(seen[r.name][key]||0)))seen[r.name]=r});
   return Object.values(seen).filter(r=>(r[key]||0)>0).sort((a,b)=>(b[key]||0)-(a[key]||0)).slice(0,3);
 }
-function ydayTableHTML(key,label){
-  const d=AE_YDAY.filter(r=>(r[key]||0)>0).sort((a,b)=>(b[key]-a[key])||((b.calls||0)-(a.calls||0))).slice(0,5);
+function ydayTableHTML(key,label,src){
+  const d=(src||AE_YDAY).filter(r=>(r[key]||0)>0).sort((a,b)=>(b[key]-a[key])||((b.calls||0)-(a.calls||0))).slice(0,5);
   if(!d.length)return'<p style="color:#9a8fa8;font-size:14px;padding:20px 0">No data yet!</p>';
   let rank=0,prev=null;
   const rows=d.map((r,i)=>{if(r[key]!==prev){rank=i+1;prev=r[key]}
     const p=PHOTOS[r.name];
     const av=p?`<img class="yd-av" style="border-color:${avBorder(r.team)}" src="${p}" alt="">`:`<div class="yd-av yd-ini">${ini(r.name)}</div>`;
-    return`<div class="yd-row${rank===1?' yd-first':''}"><span class="yd-rank">${rank}</span><span class="yd-name">${av}${r.name}</span><span class="yd-team">${r.mgr||TL[r.team]||''}</span><span class="yd-val">${fn(r[key])}</span></div>`}).join('');
+    return`<div class="yd-row${rank===1?' yd-first':''}"><span class="yd-rank">${rank}</span><span class="yd-name">${av}${r.name}</span><span class="yd-team">${r.mgr||REP_MGR[r.name]||(Object.values(MGRS).find(m=>m.reps&&m.reps.includes(r.name))||{}).label||TL[r.team]||''}</span><span class="yd-val">${fn(r[key])}</span></div>`}).join('');
   return`<div class="yd-table"><div class="yd-row yd-hdr"><span>#</span><span>Name</span><span>Team</span><span class="yd-val">${label}</span></div>${rows}</div>`;
 }
 function podHTML(reps,vFn,unit){
@@ -490,15 +494,10 @@ const TEAM_POINTS={
   Don:13, Caleb:411, Darin:163, Deana:62, Walpole:504, McClure:144,
 };
 const TEAM_PPA={
-  Walpole:84.00, Caleb:58.71, Don:4.33, Darin:27.17, McClure:20.57, Deana:10.33,
+  Walpole:109.17, Caleb:79.43, Don:24.33, Darin:40.50, McClure:39.29, Deana:21.00,
 };
+const COMP_WINNER='Walpole'; // September competition winner (static)
 const TEAM_MVP={
-  Don:{name:'Matthew Winkler',points:60},
-  Caleb:{name:'Nicholas Reis',points:69},
-  Darin:{name:'Jaxson Hellbusch',points:41},
-  Deana:{name:'Clayton Jensen',points:80},
-  Walpole:{name:'Shelley Daenzer',points:246},
-  McClure:{name:'Drew Garside / Jasmine Wieliczko (tied)',points:90},
 };
 const TEAM_BONUS={
 };
@@ -512,7 +511,8 @@ function captainsHTML(){
     const mvpLine=mvp?`<div class="captain-mvp">MVP: ${mvp.name} \u00b7 ${mvp.points} Points</div>`:'';
     const bonus=TEAM_BONUS[t.mgrKey];
     const bonusLine=bonus?`<div class="captain-bonus">${bonus}</div>`:'';
-    return`<div class="captain-card">${av}<div class="captain-info"><div class="captain-team">${t.team}</div><div class="captain-points">${ppaDisplay}</div><div class="captain-points-label">Points / AE</div>${bonusLine}${mvpLine}</div></div>`;
+    const rib=t.mgrKey===COMP_WINNER?'<div class="comp-ribbon" aria-label="First place"><svg viewBox="0 0 64 84" width="64" height="84"><path d="M18 44 L8 80 L20 72 L28 82 L34 50Z" fill="#78429A"/><path d="M46 44 L56 80 L44 72 L36 82 L30 50Z" fill="#78429A"/><circle cx="32" cy="30" r="28" fill="#E5B237"/><circle cx="32" cy="30" r="21" fill="#F8F4ED"/><text x="32" y="38" text-anchor="middle" font-family="Archivo,Arial,sans-serif" font-weight="800" font-size="22" fill="#291e3b">#1</text></svg></div>':'';
+    return`<div class="captain-card${t.mgrKey===COMP_WINNER?' comp-winner':''}">${rib}${av}<div class="captain-info"><div class="captain-team">${t.team}</div><div class="captain-points">${ppaDisplay}</div><div class="captain-points-label">Points / AE</div>${bonusLine}${mvpLine}</div></div>`;
   }).join('')+'</div>';
 }
 const RULES=[
@@ -595,17 +595,19 @@ const SLIDES=[
   {tags:['tag-ae','tag-mtd'],t:['AE','Month to Date'],h:'Top Deal Maker of the Month',sub:'Account executives · most deals closed MTD',fn:()=>podHTML(top3(AE,'units'),r=>fn(r.units)+' '+(r.units===1?'deal':'deals'),'')},
   {tags:['tag-ae','tag-yday'],t:['AE','Yesterday'],noWatermark:true,h:'Top Dog: Most calls yesterday',sub:'Top 5 account executives · outbound calls yesterday',fn:()=>ydayTableHTML('calls','Calls')},
   {tags:['tag-ae','tag-yday'],t:['AE','Yesterday'],noWatermark:true,h:'Top Dog: Most meetings booked yesterday',sub:'Top 5 account executives · meetings booked yesterday',fn:()=>ydayTableHTML('msched','Meetings booked')},
-  {tags:['tag-ae','tag-yday'],t:['AE','Yesterday'],noWatermark:true,h:'Top Dog: Most meetings completed yesterday',sub:'Top 5 account executives · meetings completed yesterday',fn:()=>ydayTableHTML('mcomp','Meetings completed')},
+  {tags:['tag-ae','tag-mtd'],t:['AE','Month to Date'],h:'Top Dog: Most meetings completed this month',sub:'Top 5 account executives · meetings completed MTD',fn:()=>ydayTableHTML('mheld','Meetings completed',AE)},
   {tags:['tag-sl','tag-mtd'],t:['Senior Living','Month to Date'],h:'Top Senior Living AEs',sub:'Closed ACV this month',fn:()=>podHTML(top3(AE,'acv','sl'),r=>fa(r.acv),'')},
   {tags:['tag-hbc','tag-mtd'],t:['Home-Based Care','Month to Date'],h:'Top Home-Based Care AEs',sub:'Closed ACV this month',fn:()=>podHTML(top3(AE,'acv','hbc'),r=>fa(r.acv),'')},
   {type:'team-deals'},
   {tags:['tag-team','tag-mtd'],t:["Deana's Team",'Month to Date'],h:'Top closed ACV',sub:"Deana Ferguson's team · closed ACV this month",fn:()=>podHTML(topNFromList(AE,'acv',MGRS.Deana.reps),r=>fa(r.acv),'')},
   {type:'spiced',noWatermark:true},
+  {type:'comp-results',noWatermark:true},
 ];
 function slideHTML(s){
   if(s.type==='spiced')return`<div class="tags"><span class="tag tag-team">Desk Reference</span></div><div class="headline">SPICED — Diagnose before you prescribe.</div><div class="subline">Sales qualification framework</div>${spicedHTML()}`;
   if(s.type==='welcome')return`<div class="tags"><span class="tag tag-team">Welcome</span></div><div class="headline">Welcome to the team!</div><div class="subline">Our newest team members</div>${welcomeHTML()}`;
   if(s.type==='team-deals')return`<div class="tags"><span class="tag tag-team">Team Deals</span><span class="tag tag-mtd">Month to Date</span></div><div class="headline">Top closed ACV by team</div><div class="subline">Top 5 reps per team · ACV + units closed</div>${teamDealsHTML()}`;
+  if(s.type==='comp-results')return`<div class="tags"><span class="tag tag-team">Team Competition</span><span class="tag tag-mtd">Final</span></div><div class="headline">September Competition Results</div><div class="subline">Final points per AE. Congrats to Team Michael - Sentinels!</div>${captainsHTML()}`;
   if(s.type==='captains')return`<div class="tags"><span class="tag tag-team">Team Competition</span></div><div class="headline">Meet the Six Teams</div><div class="subline">Suit up. Here is who is on the field this September.</div>${captainsHTML()}`;
   if(s.type==='rules')return`<div class="tags"><span class="tag tag-team">Team Competition</span></div><div class="headline">Putting Points on the Board</div><div class="subline">Every play scores. Deals in Team McClure's book score double. <span style="color:#9a8fa8">Standings updated each morning around 10am EST.</span></div>${rulesHTML()}`;
   if(s.type==='drill')return`<div class="tags"><span class="tag tag-team">Team Competition</span></div><div class="headline">Kickoff</div><div class="subline">The competition starts now.</div>${drillHTML()}`;
@@ -626,6 +628,5 @@ function tick(){clearInterval(ptick);if(paused)return;ptick=setInterval(()=>{pva
 function togglePause(){paused=!paused;const b=document.getElementById('pbtn');b.textContent=paused?'resume':'pause';b.classList.toggle('hi',!paused);paused?clearInterval(ptick):tick();}
 render();tick();
 </script>
-<div class="fom-watermark" aria-hidden="true"><span>First of the month,<br>let&rsquo;s make Q4 a Big&nbsp;One!</span></div>
 </body>
 </html>
