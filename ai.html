@@ -169,25 +169,33 @@ body{background:#F8F4ED;font-family:system-ui,-apple-system,sans-serif;margin:0;
 .captain-strip{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;justify-content:center}
 .captain-pill{border:1.5px solid #78429A;color:#291e3b;font-size:13px;font-weight:600;padding:7px 16px;border-radius:20px}
 .tracker-wrap{display:flex;flex-direction:column;gap:6px;margin-top:2px;flex:1;min-height:0}
-.field-hdrrow{display:grid;grid-template-columns:168px 1fr 64px;gap:0;align-items:end}
-.field-hdr-own{font-size:10px;font-weight:800;color:#9a8fa8;text-transform:uppercase;letter-spacing:0.08em}
-.field-yardnums{grid-column:2;display:flex;justify-content:space-between;padding:0 6px 4px;font-size:11px;font-weight:800;color:#291e3b}
+.field-hdrrow{display:grid;grid-template-columns:230px 1fr 170px;gap:0;align-items:end}
+.field-hdr-ez{font-size:13px;font-weight:800;color:#78429A;text-transform:uppercase;letter-spacing:0.06em;text-align:center}
+.field-hdr-own{font-size:13px;font-weight:800;color:#9a8fa8;text-transform:uppercase;letter-spacing:0.08em}
+.field-yardnums{grid-column:2;position:relative;height:26px;font-size:16px;font-weight:800;color:#291e3b}
+.field-yardnums span{position:absolute;bottom:4px;transform:translateX(-50%)}
 .field-hdr-stretch{font-size:10px;font-weight:800;color:#9a8fa8;text-transform:uppercase;letter-spacing:0.05em;text-align:center}
 .field-outer{display:flex;flex:1;min-height:0;border:3px solid #1e3d0f;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(41,30,59,0.15)}
 .field-lanes{display:flex;flex-direction:column;flex:1;min-height:0}
-.field-lane{display:grid;grid-template-columns:168px 1fr;flex:1}
-.field-lane-label{background:#fff;display:flex;align-items:center;justify-content:flex-end;padding:0 10px;font-size:11px;font-weight:700;color:#291e3b;border-right:3px solid #1e3d0f;border-bottom:1px solid #e8e0d4}
+.field-lane{display:grid;grid-template-columns:230px 1fr 170px;flex:1}
+.field-lane-label{background:#fff;display:flex;align-items:center;justify-content:flex-end;padding:0 16px;font-size:17px;text-align:right;line-height:1.2;font-weight:700;color:#291e3b;border-right:3px solid #1e3d0f;border-bottom:1px solid #e8e0d4}
 .field-lane:last-child .field-lane-label{border-bottom:none}
 .field-lane-track{position:relative;background:#2d6a1f;border-bottom:1px solid rgba(255,255,255,0.25)}
 .field-lane-track::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(to right,transparent,transparent calc(10% - 2px),rgba(255,255,255,0.7) calc(10% - 2px),rgba(255,255,255,0.7) 10%)}
 .field-lane:last-child .field-lane-track{border-bottom:none}
 .field-lane-track.alt{background:#316e22}
 .field-goalline{position:absolute;left:0;top:0;bottom:0;width:4px;background:#fff;z-index:2}
-.field-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;z-index:3;transition:left 0.3s ease}
-.field-marker::before{content:'';position:absolute;inset:0;border-radius:50%;background:var(--mc);box-shadow:0 1px 3px rgba(0,0,0,0.5);z-index:0}
+.field-marker{position:absolute;top:50%;transform:translate(-22px,-50%);display:flex;align-items:center;gap:10px;z-index:3}
+.field-marker.flip{flex-direction:row-reverse;transform:translate(calc(-100% + 22px),-50%)}
+.field-ball{position:relative;width:44px;height:44px;border-radius:50%;background:var(--mc);box-shadow:0 2px 5px rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1;flex-shrink:0}
+.field-pct{background:#F8F4ED;color:#291e3b;font-weight:800;font-size:20px;padding:4px 12px;border-radius:999px;box-shadow:0 1px 3px rgba(0,0,0,0.35);white-space:nowrap}
+.field-ez{background:repeating-linear-gradient(-45deg,#78429A,#78429A 8px,#6a3a89 8px,#6a3a89 16px);border-left:4px solid #fff;border-bottom:1px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center}
+.field-lane:last-child .field-ez{border-bottom:none}
+.field-ez.scored{background:repeating-linear-gradient(-45deg,#E5B237,#E5B237 8px,#d9a62c 8px,#d9a62c 16px)}
+.field-ez-in{display:flex;flex-direction:column;align-items:center;gap:6px}
 .field-marker span{position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.4))}
 .field-stretch{width:64px;background:repeating-linear-gradient(-45deg,#78429A,#78429A 6px,#653685 6px,#653685 12px);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;line-height:1.3;writing-mode:vertical-rl;transform:rotate(180deg);padding:10px 0}
-.field-note{font-size:11px;color:#9a8fa8;text-align:center}
+.field-note{font-size:14px;color:#9a8fa8;text-align:center}
 </style>
 </head>
 <body>
@@ -224,76 +232,109 @@ const MGRS={
 };
 const TL={'sl':'Senior Living','hbc':'Home-Based Care','ent':'Enterprise','bdr-sl':'BDR · SL','bdr-hbc':'BDR · HBC','bdr-ent':'BDR · Enterprise'};
 const AE=[
-  {name:'Cait Lee',team:'sl',calls:22,msched:3,acv:0,units:0,mheld:0},
+  {name:'Cait Lee',team:'sl',calls:59,msched:3,acv:400.0,units:1,mheld:9},
   {name:'Gannon Sedlak',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Shelley Daenzer',team:'sl',calls:26,msched:1,acv:0,units:0,mheld:0},
-  {name:'Jasmine Wieliczko',team:'sl',calls:32,msched:0,acv:0,units:0,mheld:0},
-  {name:'Colby Williams',team:'sl',calls:83,msched:6,acv:0,units:0,mheld:0},
+  {name:'Shelley Daenzer',team:'sl',calls:131,msched:1,acv:2844.84,units:1,mheld:3},
+  {name:'Jasmine Wieliczko',team:'sl',calls:34,msched:0,acv:0,units:0,mheld:6},
+  {name:'Colby Williams',team:'sl',calls:273,msched:6,acv:0,units:0,mheld:7},
   {name:'Grace Grady',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Drew Garside',team:'sl',calls:80,msched:0,acv:0,units:0,mheld:0},
-  {name:'Logan Hurd',team:'sl',calls:81,msched:0,acv:0,units:0,mheld:0},
+  {name:'Drew Garside',team:'sl',calls:302,msched:0,acv:6339.6,units:1,mheld:7},
+  {name:'Logan Hurd',team:'sl',calls:286,msched:0,acv:0,units:0,mheld:8},
   {name:'Julia Carr',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
   {name:'Caden Lowrance',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Julia Blackwell',team:'sl',calls:43,msched:1,acv:0,units:0,mheld:0},
-  {name:'Isabella Cura',team:'sl',calls:64,msched:14,acv:0,units:0,mheld:11},
-  {name:'Evan Baxter',team:'sl',calls:70,msched:1,acv:32151.6,units:1,mheld:0},
-  {name:'Robert Stevenson',team:'sl',calls:28,msched:2,acv:2599.0,units:1,mheld:0},
+  {name:'Julia Blackwell',team:'sl',calls:211,msched:1,acv:6349.2,units:2,mheld:6},
+  {name:'Isabella Cura',team:'sl',calls:202,msched:14,acv:0,units:0,mheld:16},
+  {name:'Evan Baxter',team:'sl',calls:175,msched:1,acv:32151.6,units:1,mheld:4},
+  {name:'Robert Stevenson',team:'sl',calls:161,msched:2,acv:7944.36,units:2,mheld:7},
   {name:'Kevin Castle',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Ulukan Ulutas',team:'sl',calls:55,msched:0,acv:0,units:0,mheld:0},
-  {name:'Chase Harris',team:'hbc',calls:87,msched:0,acv:0,units:0,mheld:0},
-  {name:'Giovanni Frugone',team:'hbc',calls:37,msched:0,acv:3770.28,units:2,mheld:0},
-  {name:'Josh Gayne',team:'sl',calls:82,msched:0,acv:1668.0,units:1,mheld:0},
+  {name:'Ulukan Ulutas',team:'sl',calls:277,msched:0,acv:0,units:0,mheld:1},
+  {name:'Chase Harris',team:'hbc',calls:334,msched:0,acv:0,units:0,mheld:6},
+  {name:'Giovanni Frugone',team:'hbc',calls:133,msched:0,acv:4346.28,units:3,mheld:2},
+  {name:'Josh Gayne',team:'sl',calls:318,msched:0,acv:1668.0,units:1,mheld:3},
   {name:'Bennet Bleil',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Caden Noble',team:'hbc',calls:70,msched:5,acv:10424.64,units:1,mheld:0},
-  {name:'Chris Pacis',team:'hbc',calls:41,msched:10,acv:9522.0,units:5,mheld:0},
+  {name:'Caden Noble',team:'hbc',calls:245,msched:5,acv:19014.72,units:2,mheld:9},
+  {name:'Chris Pacis',team:'hbc',calls:254,msched:10,acv:9522.0,units:5,mheld:17},
   {name:'Dan Arzhanov',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Ethan Hatch',team:'hbc',calls:75,msched:8,acv:2062.8,units:1,mheld:0},
-  {name:'Kyler Coles',team:'hbc',calls:41,msched:2,acv:16322.88,units:3,mheld:0},
-  {name:'Nicholas Reis',team:'hbc',calls:2,msched:1,acv:0,units:0,mheld:0},
-  {name:'Tony Humphreys',team:'hbc',calls:58,msched:8,acv:0,units:0,mheld:0},
-  {name:'Travis Barton',team:'hbc',calls:68,msched:4,acv:0,units:0,mheld:0},
-  {name:'Cody Klingler',team:'hbc',calls:63,msched:0,acv:0,units:0,mheld:0},
-  {name:'Brett Keys',team:'hbc',calls:46,msched:2,acv:0,units:0,mheld:0},
-  {name:'Daniel Bonilla',team:'hbc',calls:84,msched:1,acv:0,units:0,mheld:0},
-  {name:'Jaxson Hellbusch',team:'hbc',calls:87,msched:7,acv:9227.76,units:4,mheld:0},
-  {name:'Jordan Bailey',team:'hbc',calls:87,msched:5,acv:3554.28,units:2,mheld:0},
+  {name:'Ethan Hatch',team:'hbc',calls:314,msched:8,acv:4354.8,units:2,mheld:11},
+  {name:'Kyler Coles',team:'hbc',calls:263,msched:2,acv:16322.88,units:3,mheld:11},
+  {name:'Nicholas Reis',team:'hbc',calls:129,msched:1,acv:4201.2,units:1,mheld:10},
+  {name:'Tony Humphreys',team:'hbc',calls:269,msched:8,acv:35262.04,units:2,mheld:10},
+  {name:'Travis Barton',team:'hbc',calls:334,msched:4,acv:0,units:0,mheld:10},
+  {name:'Cody Klingler',team:'hbc',calls:296,msched:0,acv:0,units:0,mheld:2},
+  {name:'Brett Keys',team:'hbc',calls:258,msched:2,acv:1833.6,units:1,mheld:4},
+  {name:'Daniel Bonilla',team:'hbc',calls:285,msched:1,acv:0,units:0,mheld:2},
+  {name:'Jaxson Hellbusch',team:'hbc',calls:310,msched:7,acv:17634.76,units:5,mheld:16},
+  {name:'Jordan Bailey',team:'hbc',calls:329,msched:5,acv:3914.28,units:3,mheld:10},
   {name:'Kaleb Polk',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Riley Pettegrew',team:'hbc',calls:99,msched:9,acv:1475.19,units:1,mheld:0},
-  {name:'Tanner Schill',team:'hbc',calls:74,msched:1,acv:0,units:0,mheld:0},
-  {name:'Jared Godfrey',team:'hbc',calls:153,msched:8,acv:0,units:0,mheld:0},
-  {name:'Gracie Meegan',team:'hbc',calls:242,msched:26,acv:306.0,units:1,mheld:0},
-  {name:'Josh Atkinson',team:'hbc',calls:287,msched:5,acv:2993.0,units:1,mheld:0},
-  {name:'Clayton Jensen',team:'hbc',calls:17,msched:13,acv:7962.48,units:6,mheld:18},
-  {name:'Del Jenkins',team:'hbc',calls:2,msched:0,acv:0,units:0,mheld:0},
-  {name:'Jessica Downing',team:'hbc',calls:16,msched:14,acv:11457.0,units:6,mheld:19},
+  {name:'Riley Pettegrew',team:'hbc',calls:342,msched:9,acv:1475.19,units:1,mheld:10},
+  {name:'Tanner Schill',team:'hbc',calls:289,msched:1,acv:0,units:0,mheld:4},
+  {name:'Jared Godfrey',team:'hbc',calls:347,msched:8,acv:9936.48,units:1,mheld:8},
+  {name:'Gracie Meegan',team:'hbc',calls:374,msched:26,acv:2142.0,units:2,mheld:46},
+  {name:'Josh Atkinson',team:'hbc',calls:461,msched:5,acv:7873.0,units:3,mheld:10},
+  {name:'Clayton Jensen',team:'hbc',calls:110,msched:13,acv:16397.04,units:12,mheld:24},
+  {name:'Del Jenkins',team:'hbc',calls:42,msched:0,acv:0,units:0,mheld:12},
+  {name:'Jessica Downing',team:'hbc',calls:109,msched:14,acv:13061.4,units:7,mheld:26},
   {name:'Luke DeMarcus',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Mechell Howard',team:'hbc',calls:56,msched:6,acv:3228.0,units:1,mheld:7},
+  {name:'Mechell Howard',team:'hbc',calls:148,msched:6,acv:5640.0,units:2,mheld:10},
   {name:'Trevon Hymer',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Jerel Starks',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:4},
-  {name:'Tyler Olshansky',team:'hbc',calls:0,msched:0,acv:3780.0,units:1,mheld:8},
+  {name:'Jerel Starks',team:'hbc',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Tyler Olshansky',team:'hbc',calls:0,msched:0,acv:3780.0,units:1,mheld:2},
   {name:'Laurie Kaiser',team:'ent',calls:0,msched:0,acv:0,units:0,mheld:0},
   {name:'Shawn Zbranek',team:'ent',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Lucas Brandt',team:'ent',calls:0,msched:0,acv:3150.0,units:1,mheld:0},
-  {name:'Matthew Winkler',team:'ent',calls:8,msched:0,acv:13048.92,units:1,mheld:0},
+  {name:'Lucas Brandt',team:'ent',calls:0,msched:0,acv:51518.76,units:5,mheld:0},
+  {name:'Matthew Winkler',team:'ent',calls:66,msched:0,acv:21689.28,units:2,mheld:13},
   {name:'Andrew Stratton',team:'ent',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Ty Konold',team:'hbc',calls:149,msched:2,acv:8950.8,units:3,mheld:0},
-  {name:'Jack Satterthwaite',team:'hbc',calls:327,msched:5,acv:2491.0,units:1,mheld:0},
-  {name:'Alice Borg',team:'hbc',calls:140,msched:5,acv:0,units:0,mheld:0},
-  {name:'Kevin Hayes',team:'hbc',calls:27,msched:9,acv:2007.6,units:1,mheld:7},
+  {name:'Ty Konold',team:'hbc',calls:358,msched:2,acv:8950.8,units:3,mheld:7},
+  {name:'Jack Satterthwaite',team:'hbc',calls:503,msched:5,acv:2491.0,units:1,mheld:9},
+  {name:'Alice Borg',team:'hbc',calls:249,msched:5,acv:0,units:0,mheld:0},
+  {name:'Kevin Hayes',team:'hbc',calls:83,msched:9,acv:13600.2,units:3,mheld:11},
   {name:'Katy Proctor',team:'ent',calls:0,msched:0,acv:0,units:0,mheld:0},
-  {name:'Kyle Osterman',team:'ent',calls:0,msched:0,acv:0,units:0,mheld:0},
+  {name:'Kyle Osterman',team:'ent',calls:4,msched:0,acv:0,units:0,mheld:2},
   {name:'Zachary Montiel',team:'sl',calls:0,msched:0,acv:0,units:0,mheld:0},
 ];
 const REP_MGR={'Alice Borg':'Darin Ellsworth','Brett Keys':'Darin Ellsworth','Caden Noble':'Caleb Hendricks','Cait Lee':'Michael Walpole','Chase Harris':'Caleb Hendricks','Chris Pacis':'Caleb Hendricks','Clayton Jensen':'Deana Ferguson','Cody Klingler':'Caleb Hendricks','Colby Williams':'Michael Walpole','Daniel Bonilla':'Darin Ellsworth','Del Jenkins':'Don Williams','Drew Garside':'Matthew McClure','Ethan Hatch':'Caleb Hendricks','Evan Baxter':'Michael Walpole','Giovanni Frugone':'Caleb Hendricks','Gracie Meegan':'Darin Ellsworth','Isabella Cura':'Deana Ferguson','Jack Satterthwaite':'Darin Ellsworth','Jared Godfrey':'Darin Ellsworth','Jasmine Wieliczko':'Matthew McClure','Jaxson Hellbusch':'Darin Ellsworth','Jessica Downing':'Deana Ferguson','Jordan Bailey':'Darin Ellsworth','Josh Atkinson':'Darin Ellsworth','Josh Gayne':'Matthew McClure','Julia Blackwell':'Michael Walpole','Kevin Castle':'Matthew McClure','Kevin Hayes':'Deana Ferguson','Kyler Coles':'Caleb Hendricks','Logan Hurd':'Matthew McClure','Matthew Winkler':'Don Williams','Mechell Howard':'Deana Ferguson','Nicholas Reis':'Caleb Hendricks','Riley Pettegrew':'Darin Ellsworth','Robert Stevenson':'Michael Walpole','Shelley Daenzer':'Michael Walpole','Tanner Schill':'Darin Ellsworth','Tony Humphreys':'Caleb Hendricks','Travis Barton':'Caleb Hendricks','Ty Konold':'Caleb Hendricks','Tyler Olshansky':'Deana Ferguson','Ulukan Ulutas':'Matthew McClure'};
-// Yesterday-only AE activity (refresh daily). Fields: mgr (SF manager), calls, msched (booked), mcomp (completed). Current: Wed Oct 7 (calls: leaderboard top 3, BDR Chandler Bice removed; booked: SF chart, 4 bars visible)
+// Yesterday-only AE activity (refresh daily). Fields: mgr (SF manager), calls, msched (booked), mcomp (completed). Current: Fri Oct 9 (calls: Daily Calls Grid; meetings booked yesterday: no source today)
 const AE_YDAY=[
-  {name:'Jordan Bailey',team:'hbc',mgr:'',calls:80,msched:0,mcomp:0},
-  {name:'Chase Harris',team:'hbc',mgr:'',calls:79,msched:0,mcomp:0},
-  {name:'Chandler Bice',team:'bdr-ent',mgr:'BDR',calls:60,msched:0,mcomp:0},
-  {name:'Gracie Meegan',team:'hbc',mgr:'',calls:0,msched:5,mcomp:0},
-  {name:'Chris Pacis',team:'hbc',mgr:'',calls:0,msched:3,mcomp:0},
-  {name:'Clayton Jensen',team:'hbc',mgr:'',calls:0,msched:3,mcomp:0},
-  {name:'Jessica Downing',team:'hbc',mgr:'',calls:0,msched:3,mcomp:0},
+  {name:'Chandler Bice',team:'bdr-ent',mgr:'BDR',calls:49,msched:0,mcomp:0},
+  {name:'Robert Stevenson',team:'sl',mgr:'',calls:38,msched:0,mcomp:0},
+  {name:'Cait Lee',team:'sl',mgr:'',calls:14,msched:0,mcomp:0},
+  {name:'Shelley Daenzer',team:'sl',mgr:'',calls:24,msched:0,mcomp:0},
+  {name:'Julia Blackwell',team:'sl',mgr:'',calls:2,msched:0,mcomp:0},
+  {name:'Colby Williams',team:'sl',mgr:'',calls:41,msched:0,mcomp:0},
+  {name:'Jasmine Wieliczko',team:'sl',mgr:'',calls:2,msched:0,mcomp:0},
+  {name:'Ulukan Ulutas',team:'sl',mgr:'',calls:45,msched:0,mcomp:0},
+  {name:'Logan Hurd',team:'sl',mgr:'',calls:40,msched:0,mcomp:0},
+  {name:'Drew Garside',team:'sl',mgr:'',calls:55,msched:0,mcomp:0},
+  {name:'Josh Gayne',team:'sl',mgr:'',calls:48,msched:0,mcomp:0},
+  {name:'Del Jenkins',team:'hbc',mgr:'',calls:31,msched:0,mcomp:0},
+  {name:'Matthew Winkler',team:'ent',mgr:'',calls:29,msched:0,mcomp:0},
+  {name:'Kevin Hayes',team:'hbc',mgr:'',calls:19,msched:0,mcomp:0},
+  {name:'Clayton Jensen',team:'hbc',mgr:'',calls:20,msched:0,mcomp:0},
+  {name:'Jessica Downing',team:'hbc',mgr:'',calls:2,msched:0,mcomp:0},
+  {name:'Mechell Howard',team:'hbc',mgr:'',calls:32,msched:0,mcomp:0},
+  {name:'Isabella Cura',team:'sl',mgr:'',calls:37,msched:0,mcomp:0},
+  {name:'Alice Borg',team:'hbc',mgr:'',calls:21,msched:0,mcomp:0},
+  {name:'Tanner Schill',team:'hbc',mgr:'',calls:63,msched:0,mcomp:0},
+  {name:'Daniel Bonilla',team:'hbc',mgr:'',calls:61,msched:0,mcomp:0},
+  {name:'Brett Keys',team:'hbc',mgr:'',calls:38,msched:0,mcomp:0},
+  {name:'Jaxson Hellbusch',team:'hbc',mgr:'',calls:44,msched:0,mcomp:0},
+  {name:'Jordan Bailey',team:'hbc',mgr:'',calls:46,msched:0,mcomp:0},
+  {name:'Jared Godfrey',team:'hbc',mgr:'',calls:46,msched:0,mcomp:0},
+  {name:'Gracie Meegan',team:'hbc',mgr:'',calls:52,msched:0,mcomp:0},
+  {name:'Riley Pettegrew',team:'hbc',mgr:'',calls:51,msched:0,mcomp:0},
+  {name:'Josh Atkinson',team:'hbc',mgr:'',calls:52,msched:0,mcomp:0},
+  {name:'Jack Satterthwaite',team:'hbc',mgr:'',calls:40,msched:0,mcomp:0},
+  {name:'Giovanni Frugone',team:'hbc',mgr:'',calls:22,msched:0,mcomp:0},
+  {name:'Chase Harris',team:'hbc',mgr:'',calls:61,msched:0,mcomp:0},
+  {name:'Kyler Coles',team:'hbc',mgr:'',calls:45,msched:0,mcomp:0},
+  {name:'Caden Noble',team:'hbc',mgr:'',calls:1,msched:0,mcomp:0},
+  {name:'Nicholas Reis',team:'hbc',mgr:'',calls:42,msched:0,mcomp:0},
+  {name:'Ethan Hatch',team:'hbc',mgr:'',calls:38,msched:0,mcomp:0},
+  {name:'Chris Pacis',team:'hbc',mgr:'',calls:45,msched:0,mcomp:0},
+  {name:'Tony Humphreys',team:'hbc',mgr:'',calls:35,msched:0,mcomp:0},
+  {name:'Cody Klingler',team:'hbc',mgr:'',calls:44,msched:0,mcomp:0},
+  {name:'Travis Barton',team:'hbc',mgr:'',calls:45,msched:0,mcomp:0},
+  {name:'Ty Konold',team:'hbc',mgr:'',calls:42,msched:0,mcomp:0},
 ];
 const BDR=[
   {name:'Ben Durgin',team:'bdr-hbc',calls:0,msched:0,sals:0,sourced:0},
@@ -477,9 +518,9 @@ const TEAM_POINTS={
   Don:13, Caleb:411, Darin:163, Deana:62, Walpole:504, McClure:144,
 };
 const TEAM_PPA={
-  Walpole:109.17, Caleb:79.43, Don:24.33, Darin:40.50, McClure:39.29, Deana:21.00,
+  Walpole:16.5, Caleb:31.1, McClure:4.6, Darin:11.3, Deana:19.9, Don:15.8,
 };
-const COMP_WINNER='Walpole'; // September competition winner (static)
+const COMP_WINNER=null; // no ribbon until the competition ends; set to the winning team key (e.g. 'Caleb') then
 const TEAM_MVP={
 };
 const TEAM_BONUS={
@@ -537,6 +578,9 @@ function drillHTML(){
   </div>
   <div class="captain-strip">${TEAMS.map(t=>`<span class="captain-pill">${t.captain}</span>`).join('')}</div>`;
 }
+// Weekly stretch goals (Tanner's WEEKLY SCOREBOARD): [week ACV, weekly goal]. Hit 100% = end zone.
+const COMP_WEEK=1;
+const TEAM_WEEK={Walpole:[46845,42188],Caleb:[68673,62500],McClure:[8008,37500],Darin:[34768,46875],Deana:[51331,46875],Don:[21689,36250]};
 const STRETCH_GOALS={
   Caleb:225000, Darin:140000, Deana:200000, Walpole:160000, McClure:130000, Don:370000,
 };
@@ -550,25 +594,27 @@ function trackerHTML(){
   const yards=['10','20','30','40','50','40','30','20','10'];
   return`<div class="tracker-wrap">
   <div class="field-hdrrow">
-    <div class="field-hdr-own">Own Goal Line</div>
-    <div class="field-yardnums">${yards.map(y=>`<span>${y}</span>`).join('')}</div>
-    <div class="field-hdr-stretch">Stretch<br>Goal</div>
+    <div class="field-hdr-own">Own goal line</div>
+    <div class="field-yardnums">${yards.map((y,i)=>`<span style="left:${(i+1)*10}%">${y}</span>`).join('')}</div>
+    <div class="field-hdr-ez">End zone</div>
   </div>
   <div class="field-outer">
     <div class="field-lanes">${TEAMS.map((t,i)=>{
       const mc=(MGRS[t.mgrKey]&&MGRS[t.mgrKey].color)||'#E5B237';
-      const goal=STRETCH_GOALS[t.mgrKey]||1;
-      const cur=teamACVTotal(t.mgrKey);
-      const pct=Math.max(2,Math.min(97,(cur/goal)*100));
+      const w=TEAM_WEEK[t.mgrKey]||[0,1];
+      const pct=w[0]/w[1]*100, met=pct>=100;
+      const label=`<span class="field-pct">${pct.toFixed(1)}%</span>`;
+      const ball=`<span class="field-ball" style="--mc:${mc}">\u{1F3C8}</span>`;
+      const onField=met?'':`<div class="field-marker${pct>80?' flip':''}" style="left:${Math.max(3,pct).toFixed(1)}%">${ball}${label}</div>`;
       return`
       <div class="field-lane">
         <div class="field-lane-label">${t.team}</div>
-        <div class="field-lane-track${i%2?' alt':''}"><div class="field-goalline"></div><div class="field-marker" style="left:${pct.toFixed(1)}%;--mc:${mc}"><span>\u{1F3C8}</span></div></div>
+        <div class="field-lane-track${i%2?' alt':''}"><div class="field-goalline"></div>${onField}</div>
+        <div class="field-ez${met?' scored':''}">${met?`<div class="field-ez-in">${ball}${label}</div>`:''}</div>
       </div>`;}).join('')}
     </div>
-    <div class="field-stretch">Stretch Goal</div>
   </div>
-  <div class="field-note">Every team starts on its own goal line. Update weekly: slide your team's marker downfield as points post. Cross the goal line, take the stretch goal bonus.</div>
+  <div class="field-note">Each week every team starts back on its own goal line. Hit 100% of the weekly ACV stretch goal to reach the end zone.</div>
   </div>`;
 }
 const SLIDES=[
@@ -585,17 +631,18 @@ const SLIDES=[
   {type:'team-deals'},
   {tags:['tag-team','tag-mtd'],t:["Deana's Team",'Month to Date'],h:'Top closed ACV',sub:"Deana Ferguson's team · closed ACV this month",fn:()=>podHTML(topNFromList(AE,'acv',MGRS.Deana.reps),r=>fa(r.acv),'')},
   {type:'spiced',noWatermark:true},
+  {type:'tracker'},
   {type:'comp-results',noWatermark:true},
 ];
 function slideHTML(s){
   if(s.type==='spiced')return`<div class="tags"><span class="tag tag-team">Desk Reference</span></div><div class="headline">SPICED — Diagnose before you prescribe.</div><div class="subline">Sales qualification framework</div>${spicedHTML()}`;
   if(s.type==='welcome')return`<div class="tags"><span class="tag tag-team">Welcome</span></div><div class="headline">Welcome to the team!</div><div class="subline">Our newest team members</div>${welcomeHTML()}`;
   if(s.type==='team-deals')return`<div class="tags"><span class="tag tag-team">Team Deals</span><span class="tag tag-mtd">Month to Date</span></div><div class="headline">Top closed ACV by team</div><div class="subline">Top 5 reps per team · ACV + units closed</div>${teamDealsHTML()}`;
-  if(s.type==='comp-results')return`<div class="tags"><span class="tag tag-team">Team Competition</span><span class="tag tag-mtd">Final</span></div><div class="headline">September Competition Results</div><div class="subline">Final points per AE. Congrats to Team Michael - Sentinels!</div>${captainsHTML()}`;
+  if(s.type==='comp-results')return`<div class="tags"><span class="tag tag-team">Team Competition</span><span class="tag tag-yday">Week ${COMP_WEEK}</span></div><div class="headline">October Competition Standings</div><div class="subline">Points per AE. Standings update weekly.</div>${captainsHTML()}`;
   if(s.type==='captains')return`<div class="tags"><span class="tag tag-team">Team Competition</span></div><div class="headline">Meet the Six Teams</div><div class="subline">Suit up. Here is who is on the field this September.</div>${captainsHTML()}`;
   if(s.type==='rules')return`<div class="tags"><span class="tag tag-team">Team Competition</span></div><div class="headline">Putting Points on the Board</div><div class="subline">Every play scores. Deals in Team McClure's book score double. <span style="color:#9a8fa8">Standings updated each morning around 10am EST.</span></div>${rulesHTML()}`;
   if(s.type==='drill')return`<div class="tags"><span class="tag tag-team">Team Competition</span></div><div class="headline">Kickoff</div><div class="subline">The competition starts now.</div>${drillHTML()}`;
-  if(s.type==='tracker')return`<div class="tags"><span class="tag tag-team">Team Competition</span></div><div class="headline">The Drive Tracker</div><div class="subline">Every team starts on its own goal line. Progress updates as points post.</div>${trackerHTML()}`;
+  if(s.type==='tracker')return`<div class="tags"><span class="tag tag-team">Team Competition</span><span class="tag tag-yday">Week ${COMP_WEEK}</span></div><div class="headline">Week ${COMP_WEEK} Stretch Goals</div><div class="subline">Weekly closed ACV against each team's stretch goal. 100% puts you in the end zone.</div>${trackerHTML()}`;
   return`<div class="tags">${s.tags.map((t,i)=>`<span class="tag ${t}">${s.t[i]}</span>`).join('')}</div><div class="headline">${s.h}</div><div class="subline">${s.sub}</div>${s.fn()}`;
 }
 let cur=0,paused=false,pval=0,ptick;const DUR=7000;
